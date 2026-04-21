@@ -6,163 +6,192 @@
 <title>La Passione — Karolina Da Corso</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-
 :root{
-  --c:   #F7F3EC;   /* cream */
-  --c2:  #EDE5D5;   /* cream darker */
-  --c3:  #E2D6C2;   /* cream darkest */
-  --ink: #1B1712;
-  --ink2:#2E2620;
-  --mu:  rgba(27,23,18,.42);
-  --g:   #C9A96E;   /* gold */
+  --c:   #F6F1EA;
+  --c2:  #EDE4D4;
+  --c3:  #E3D7C4;
+  --ink: #1A1410;
+  --mu:  rgba(26,20,16,.4);
+  --g:   #C9A96E;
   --gl:  #E6C88C;
   --gll: #F4E8CC;
   --gd:  #8A6830;
   --w:   #FDFCFB;
-  --dark:#1B1712;
-  --fd:  'Cormorant Garamond',Georgia,serif;
-  --fb:  'DM Sans',Helvetica,sans-serif;
+  --dark:#181410;
+  --fh:  'Josefin Sans',sans-serif;
+  --fi:  'Cormorant Garamond',Georgia,serif;
+  --fb:  'DM Sans',sans-serif;
   --e:   cubic-bezier(.16,1,.3,1);
 }
-
 body{background:var(--c);color:var(--ink);font-family:var(--fb);font-weight:300;line-height:1.72;overflow-x:hidden;cursor:none}
-h1,h2,h3,h4{font-family:var(--fd);font-weight:300;line-height:1.05;letter-spacing:-.02em}
 img{display:block;max-width:100%}
-a{cursor:none}
-button{cursor:none}
+a,button{cursor:none}
 
-/* ── GOLD TEXT ── */
-.gx{background:linear-gradient(135deg,var(--gd) 0%,var(--gl) 35%,var(--gll) 52%,var(--gl) 68%,var(--gd) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+/* ── HEADING TYPE ── */
+h1,h2,h3,h4{
+  font-family:var(--fh);
+  text-transform:uppercase;
+  letter-spacing:.07em;
+  font-weight:400;
+  line-height:1;
+}
+
+/* ── GOLD ── */
+.gx{background:linear-gradient(135deg,var(--gd) 0%,var(--gl) 38%,var(--gll) 54%,var(--gl) 70%,var(--gd) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .ga{background:linear-gradient(90deg,var(--gd),var(--gl),var(--gll),var(--gl),var(--gd));background-size:300% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 6s linear infinite}
-@keyframes shimmer{0%{background-position:0% center}100%{background-position:300% center}}
+@keyframes shimmer{0%{background-position:0 center}100%{background-position:300% center}}
+
+/* ── DRIFTING BG TEXT ── */
+.bgw{
+  position:absolute;
+  font-family:var(--fi);
+  font-style:italic;
+  font-weight:300;
+  pointer-events:none;
+  user-select:none;
+  z-index:0;
+  white-space:nowrap;
+}
+/* different drift animations */
+@keyframes d1{0%{transform:translate(-5%,-8%) rotate(-6deg)}33%{transform:translate(4%,-2%) rotate(-3deg)}66%{transform:translate(1%,6%) rotate(-7deg)}100%{transform:translate(-5%,-8%) rotate(-6deg)}}
+@keyframes d2{0%{transform:translate(8%,3%) rotate(5deg)}40%{transform:translate(-3%,7%) rotate(9deg)}80%{transform:translate(5%,-4%) rotate(4deg)}100%{transform:translate(8%,3%) rotate(5deg)}}
+@keyframes d3{0%{transform:translate(-2%,0%) rotate(-2deg)}50%{transform:translate(3%,-5%) rotate(2deg)}100%{transform:translate(-2%,0%) rotate(-2deg)}}
+@keyframes d4{0%{transform:translate(0%,4%) rotate(8deg)}35%{transform:translate(-5%,-3%) rotate(5deg)}70%{transform:translate(3%,1%) rotate(10deg)}100%{transform:translate(0%,4%) rotate(8deg)}}
+@keyframes spin{0%{transform:translate(-50%,-50%) rotate(0deg)}100%{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes spinr{0%{transform:translate(-50%,-50%) rotate(0deg)}100%{transform:translate(-50%,-50%) rotate(-360deg)}}
 
 /* ── PROGRESS ── */
-#prog{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--gd),var(--gl),var(--gll));z-index:9999;transition:width .08s linear}
+#prog{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--gd),var(--gl),var(--gll));z-index:9999}
 
 /* ── CURSOR ── */
-#dot{position:fixed;width:7px;height:7px;background:var(--g);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .15s}
+#dot{position:fixed;width:7px;height:7px;background:var(--g);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .15s,opacity .2s}
 #ring{position:fixed;width:30px;height:30px;border:1px solid rgba(201,169,110,.55);border-radius:50%;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);transition:width .3s var(--e),height .3s var(--e),opacity .3s}
 
 /* ── NAV ── */
-nav{position:fixed;top:2px;left:0;right:0;z-index:500;padding:clamp(18px,3vw,28px) clamp(24px,5vw,72px);display:flex;align-items:center;justify-content:space-between;transition:background .5s var(--e),padding .4s var(--e),border-color .4s}
-nav.s{background:rgba(247,243,236,.93);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:12px clamp(24px,5vw,72px);border-bottom:1px solid rgba(27,23,18,.07)}
-.nav-logo{font-family:var(--fd);font-size:clamp(1.05rem,1.7vw,1.45rem);font-weight:400;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink)}
-.nav-logo em{font-style:italic}
-.nav-links{display:flex;list-style:none;gap:clamp(22px,3vw,44px)}
-.nav-links a{text-decoration:none;color:var(--ink);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;opacity:.5;transition:opacity .3s,color .3s}
+nav{position:fixed;top:2px;left:0;right:0;z-index:500;padding:clamp(18px,3vw,28px) clamp(24px,5vw,72px);display:flex;align-items:center;justify-content:space-between;transition:background .5s var(--e),padding .4s var(--e)}
+nav.s{background:rgba(246,241,234,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:12px clamp(24px,5vw,72px);border-bottom:1px solid rgba(26,20,16,.06)}
+.nl{font-family:var(--fh);font-size:clamp(1rem,1.6vw,1.35rem);font-weight:400;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--ink)}
+.nav-links{display:flex;list-style:none;gap:clamp(20px,3vw,44px)}
+.nav-links a{text-decoration:none;color:var(--ink);font-family:var(--fh);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;opacity:.45;transition:opacity .3s,color .3s}
 .nav-links a:hover{opacity:1;color:var(--gd)}
-.nav-btn{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);border:1px solid rgba(27,23,18,.28);padding:9px 22px;text-decoration:none;transition:background .3s,color .3s,border-color .3s}
+.nav-btn{font-family:var(--fh);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);border:1px solid rgba(26,20,16,.25);padding:9px 22px;text-decoration:none;transition:background .3s,color .3s,border-color .3s}
 .nav-btn:hover{background:var(--gd);color:var(--w);border-color:var(--gd)}
 
-/* ── HERO ── */
-.hero{min-height:100vh;background:var(--c);display:grid;grid-template-columns:1fr min(50vw,580px);position:relative;overflow:hidden}
-.hero-left{display:flex;flex-direction:column;justify-content:flex-end;padding:0 clamp(24px,5vw,72px) clamp(64px,9vh,108px);position:relative;z-index:2}
-.hero-right{position:relative;overflow:hidden}
-.hero-photo{position:absolute;inset:0;background:var(--c2);background-image:url('images/hero.jpg');background-size:cover;background-position:center top;clip-path:polygon(14% 0,100% 0,100% 100%,0 100%)}
-.hero-photo-mono{position:absolute;top:50%;left:55%;transform:translate(-50%,-50%);font-family:var(--fd);font-size:clamp(8rem,14vw,16rem);font-weight:300;font-style:italic;color:rgba(201,169,110,.09);pointer-events:none;user-select:none;letter-spacing:-.04em}
-/* big bg word */
-.hero-bgword{position:absolute;bottom:-4%;left:-2%;font-family:var(--fd);font-size:clamp(12rem,28vw,30rem);font-weight:300;font-style:italic;line-height:1;color:rgba(27,23,18,.028);pointer-events:none;user-select:none;z-index:1;letter-spacing:-.06em;white-space:nowrap}
-
-.hero-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:20px}
-.hero-lbl{font-size:.64rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gd);opacity:0;transform:translateX(-14px);transition:opacity .8s var(--e),transform .8s var(--e)}
-.hero-lbl.on{opacity:1;transform:translateX(0)}
-.hero-rule{width:38px;height:1px;background:var(--g);opacity:0;transform:scaleX(0);transform-origin:left;transition:opacity .6s var(--e) .2s,transform .7s var(--e) .2s}
-.hero-rule.on{opacity:1;transform:scaleX(1)}
-
-h1.hero-h1{font-size:clamp(5rem,12vw,13rem);letter-spacing:-.04em;line-height:.9;margin-bottom:28px}
-.hero-h1 .w{display:block;opacity:0;transform:translateY(44px);transition:opacity .9s var(--e),transform .9s var(--e)}
-.hero-h1 .w.on{opacity:1;transform:translateY(0)}
-
-.hero-tag{font-size:clamp(.75rem,1.2vw,.9rem);letter-spacing:.3em;text-transform:uppercase;color:var(--mu);margin-bottom:40px;opacity:0;transform:translateY(10px);transition:opacity .8s var(--e),transform .8s var(--e)}
-.hero-tag.on{opacity:1;transform:translateY(0)}
-
-.hero-btm{display:flex;align-items:center;gap:36px;opacity:0;transform:translateY(10px);transition:opacity .8s var(--e),transform .8s var(--e)}
-.hero-btm.on{opacity:1;transform:translateY(0)}
-.hero-aside{font-family:var(--fd);font-style:italic;font-size:clamp(.85rem,1.1vw,1rem);color:var(--mu);max-width:200px;line-height:1.55}
-
-.scroll-hint{position:absolute;right:clamp(24px,4vw,60px);bottom:clamp(64px,9vh,108px);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:3}
-.scroll-hint span{writing-mode:vertical-rl;font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mu)}
-.scroll-bar{width:1px;height:50px;background:var(--g);transform-origin:top;animation:sb 2.2s ease-in-out infinite}
-@keyframes sb{0%,100%{transform:scaleY(1);opacity:.45}50%{transform:scaleY(.38);opacity:1}}
-
 /* ── BTN ── */
-.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--fb);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);border:1px solid rgba(27,23,18,.28);padding:13px 30px;text-decoration:none;transition:background .3s,color .3s,border-color .3s}
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--fh);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);border:1px solid rgba(26,20,16,.25);padding:13px 30px;text-decoration:none;transition:background .3s,color .3s,border-color .3s}
 .btn:hover{background:var(--ink);color:var(--c);border-color:var(--ink)}
 .btn-g{background:var(--gd);color:var(--w);border-color:var(--gd)}
 .btn-g:hover{background:transparent;color:var(--gd)}
-.btn-inv{color:var(--w);border-color:rgba(253,252,251,.28)}
+.btn-inv{color:var(--w);border-color:rgba(253,252,251,.25)}
 .btn-inv:hover{background:var(--g);color:var(--dark);border-color:var(--g)}
 .arr{transition:transform .3s}
 .btn:hover .arr{transform:translateX(5px)}
 
+/* ── HERO ── */
+.hero{min-height:100vh;background:var(--c);display:grid;grid-template-columns:1fr min(48vw,560px);position:relative;overflow:hidden}
+.hero-left{display:flex;flex-direction:column;justify-content:flex-end;padding:0 clamp(24px,5vw,72px) clamp(64px,9vh,108px);position:relative;z-index:2}
+.hero-right{position:relative;overflow:hidden}
+.hero-photo{position:absolute;inset:0;background:var(--c2);background-image:url('images/hero.jpg');background-size:cover;background-position:center top;clip-path:polygon(16% 0,100% 0,100% 100%,0 100%)}
+.hero-photo-k{position:absolute;top:50%;left:56%;transform:translate(-50%,-50%);font-family:var(--fi);font-size:clamp(9rem,16vw,18rem);font-weight:300;font-style:italic;color:rgba(201,169,110,.08);pointer-events:none;user-select:none;letter-spacing:-.04em}
+
+/* hero bg drift */
+.hero-bgw{font-size:clamp(9rem,22vw,24rem);color:rgba(26,20,16,.025);top:5%;left:-5%;animation:d1 55s ease-in-out infinite}
+
+.hero-ey{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.h-lbl{font-family:var(--fh);font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gd);opacity:0;transform:translateX(-14px);transition:opacity .8s var(--e),transform .8s var(--e)}
+.h-lbl.on{opacity:1;transform:translateX(0)}
+.h-rule{width:36px;height:1px;background:var(--g);opacity:0;transform:scaleX(0);transform-origin:left;transition:opacity .5s .2s,transform .7s var(--e) .2s}
+.h-rule.on{opacity:1;transform:scaleX(1)}
+
+h1.h1{font-size:clamp(5.5rem,13vw,14rem);letter-spacing:.04em;line-height:.92;margin-bottom:30px}
+.h1 .w{display:block;opacity:0;transform:translateY(48px);transition:opacity .9s var(--e),transform .9s var(--e)}
+.h1 .w.on{opacity:1;transform:translateY(0)}
+
+.h-tag{font-family:var(--fb);font-size:clamp(.75rem,1.1vw,.88rem);letter-spacing:.28em;text-transform:uppercase;color:var(--mu);margin-bottom:40px;opacity:0;transform:translateY(10px);transition:opacity .8s var(--e),transform .8s var(--e)}
+.h-tag.on{opacity:1;transform:translateY(0)}
+.h-btm{display:flex;align-items:center;gap:32px;opacity:0;transform:translateY(10px);transition:opacity .8s var(--e),transform .8s var(--e)}
+.h-btm.on{opacity:1;transform:translateY(0)}
+.h-aside{font-family:var(--fi);font-style:italic;font-size:clamp(.85rem,1.1vw,1rem);color:var(--mu);max-width:190px;line-height:1.5}
+.scroll-h{position:absolute;right:clamp(24px,4vw,58px);bottom:clamp(64px,9vh,108px);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:3}
+.scroll-h span{writing-mode:vertical-rl;font-family:var(--fh);font-size:.56rem;letter-spacing:.24em;text-transform:uppercase;color:var(--mu)}
+.scroll-bar{width:1px;height:50px;background:var(--g);transform-origin:top;animation:sb 2.2s ease-in-out infinite}
+@keyframes sb{0%,100%{transform:scaleY(1);opacity:.4}50%{transform:scaleY(.35);opacity:1}}
+
 /* ── MARQUEE ── */
-.mq{overflow:hidden;border-top:1px solid rgba(27,23,18,.09);border-bottom:1px solid rgba(27,23,18,.09);padding:20px 0;background:var(--c)}
+.mq{overflow:hidden;border-top:1px solid rgba(26,20,16,.09);border-bottom:1px solid rgba(26,20,16,.09);padding:20px 0}
 .mq--dk{background:var(--dark);border-color:rgba(201,169,110,.12)}
-.mq-inner{display:flex;white-space:nowrap;animation:mqL 28s linear infinite}
-.mq-r{animation:mqR 28s linear infinite}
+.mqi{display:flex;white-space:nowrap;animation:mqL 28s linear infinite}
+.mqr{animation:mqR 28s linear infinite}
 @keyframes mqL{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 @keyframes mqR{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
-.mq-i{font-family:var(--fd);font-style:italic;font-weight:300;font-size:clamp(1.3rem,2.5vw,2rem);color:var(--gd);padding:0 30px;user-select:none}
+.mq-i{font-family:var(--fi);font-style:italic;font-weight:300;font-size:clamp(1.3rem,2.5vw,2rem);color:var(--gd);padding:0 28px;user-select:none}
 .mq--dk .mq-i{color:var(--g)}
-.mq-sep{color:var(--g);font-style:normal;padding:0 4px;font-family:var(--fd)}
+.mq-dot{color:var(--g);font-family:var(--fi);padding:0 4px}
 
-/* ── SECTIONS ── */
-.sec{padding:clamp(80px,10vw,140px) clamp(24px,5vw,72px)}
+/* ── SECTION SYSTEM ── */
+.sec{padding:clamp(88px,11vw,150px) clamp(24px,5vw,72px);position:relative;overflow:hidden}
 .sec--alt{background:var(--c2)}
 .sec--alt2{background:var(--c3)}
 .sec--dk{background:var(--dark);color:var(--w)}
 
-.ey{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.ey{display:flex;align-items:center;gap:12px;margin-bottom:18px;position:relative;z-index:1}
 .ey::before{content:'';display:block;width:22px;height:1px;background:var(--g);flex-shrink:0}
-.sec-lbl{font-size:.63rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gd)}
-.sec--dk .sec-lbl{color:var(--g)}
+.slbl{font-family:var(--fh);font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gd)}
+.sec--dk .slbl{color:var(--g)}
 .sec--dk .ey::before{background:var(--g)}
 
 /* ── ANIM HELPERS ── */
 .ah{opacity:0;transform:translateY(26px)}
-.ahl{opacity:0;transform:translateX(-30px)}
-.ahr{opacity:0;transform:translateX(30px)}
-.ahc{opacity:0;transform:scale(.95)}
-.ah.av,.ahl.av,.ahr.av,.ahc.av{opacity:1;transform:none;transition:opacity .75s var(--e),transform .75s var(--e)}
+.ahl{opacity:0;transform:translateX(-28px)}
+.ahr{opacity:0;transform:translateX(28px)}
+.ahc{opacity:0;transform:scale(.95) translateY(12px)}
+.ah.av,.ahl.av,.ahr.av,.ahc.av{opacity:1;transform:none;transition:opacity .8s var(--e),transform .8s var(--e)}
 
 /* ── PHILOSOPHY ── */
-.phil-q{font-family:var(--fd);font-style:italic;font-weight:300;font-size:clamp(1.7rem,4.5vw,4.5rem);line-height:1.2;letter-spacing:-.02em;max-width:920px}
-.phil-attr{display:flex;align-items:center;gap:14px;margin-top:32px}
-.phil-attr::before{content:'';width:36px;height:1px;background:var(--g)}
-.phil-attr span{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mu)}
+/* full-vp editorial quote section */
+.phil{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.phil-bgw1{font-size:clamp(8rem,18vw,22rem);color:rgba(201,169,110,.055);top:10%;left:-8%;animation:d2 60s ease-in-out infinite}
+.phil-bgw2{font-size:clamp(6rem,13vw,16rem);color:rgba(26,20,16,.028);bottom:5%;right:-5%;animation:d4 50s ease-in-out infinite}
+.phil-inner{position:relative;z-index:1;max-width:1000px}
+.phil-q{font-family:var(--fi);font-style:italic;font-weight:300;font-size:clamp(1.9rem,5vw,5rem);line-height:1.18;letter-spacing:-.01em}
+.phil-q em{font-style:normal;-webkit-text-fill-color:initial;background:none;color:var(--gd)}
+.phil-attr{display:flex;align-items:center;gap:14px;margin-top:36px}
+.phil-attr::before{content:'';width:34px;height:1px;background:var(--g)}
+.phil-attr span{font-family:var(--fb);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mu)}
 
-/* ── SERVICES LIST ── */
-.srv-hd{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:clamp(52px,6vw,88px)}
-.srv-hd h2{font-size:clamp(2.5rem,6vw,5.5rem)}
-.srv-hd-txt{color:var(--mu);font-size:.9rem;max-width:360px}
-
-.srv-list{border-top:1px solid rgba(27,23,18,.1)}
-.srv-item{display:grid;grid-template-columns:72px 1fr 32px;align-items:center;gap:24px;padding:22px 0;border-bottom:1px solid rgba(27,23,18,.07);position:relative;overflow:hidden;transition:padding .3s var(--e)}
+/* ── SERVICES ── */
+.srv-bgw{font-size:clamp(8rem,18vw,22rem);color:rgba(26,20,16,.028);top:20%;right:-5%;animation:d3 65s ease-in-out infinite}
+.srv-hd{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:clamp(52px,6vw,88px);position:relative;z-index:1}
+.srv-hd h2{font-size:clamp(2.5rem,5.5vw,5rem)}
+.srv-hd-p{color:var(--mu);font-size:.88rem;max-width:340px}
+.srv-list{border-top:1px solid rgba(26,20,16,.1);position:relative;z-index:1}
+.srv-item{display:grid;grid-template-columns:80px 1fr 28px;align-items:center;gap:20px;padding:24px 0;border-bottom:1px solid rgba(26,20,16,.07);overflow:hidden;position:relative;transition:padding-left .35s var(--e)}
 .srv-item::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--g);transform:scaleX(0);transform-origin:left;transition:transform .55s var(--e)}
 .srv-item:hover::after{transform:scaleX(1)}
-.srv-item:hover{padding-left:8px}
-.srv-num{font-family:var(--fd);font-size:clamp(1.6rem,2.8vw,2.5rem);font-weight:300;color:var(--g);line-height:1}
-.srv-cat{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mu);margin-bottom:3px}
-.srv-name{font-family:var(--fd);font-size:clamp(1.2rem,2.2vw,1.8rem);font-weight:400}
-.srv-sub{font-size:.78rem;color:var(--mu);margin-top:2px}
-.srv-arr{font-size:1rem;color:var(--gd);opacity:0;transform:translateX(-6px);transition:opacity .3s,transform .3s}
+.srv-item:hover{padding-left:10px}
+.srv-n{font-family:var(--fi);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:300;color:var(--g);line-height:1}
+.srv-cat{font-family:var(--fh);font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mu);margin-bottom:3px}
+.srv-name{font-family:var(--fh);font-size:clamp(1rem,2vw,1.6rem);font-weight:400;letter-spacing:.06em;text-transform:uppercase}
+.srv-sub{font-family:var(--fb);font-size:.76rem;color:var(--mu);margin-top:3px}
+.srv-arr{font-size:.9rem;color:var(--gd);opacity:0;transform:translateX(-6px);transition:opacity .3s,transform .3s}
 .srv-item:hover .srv-arr{opacity:1;transform:translateX(0)}
 
-/* ── FEATURE (dark asymmetric) ── */
-.feature{display:grid;grid-template-columns:45fr 55fr;min-height:min(90vh,800px)}
-.feat-body{background:var(--dark);color:var(--w);padding:clamp(60px,8vw,120px) clamp(40px,6vw,90px);display:flex;flex-direction:column;justify-content:center}
-.feat-h2{font-size:clamp(2.3rem,5vw,5rem);margin-bottom:22px}
-.feat-h2 em{font-style:italic}
-.feat-p{color:rgba(253,252,251,.6);font-size:.88rem;line-height:1.85;margin-bottom:36px;max-width:380px}
-.feat-ul{list-style:none;margin-bottom:40px}
-.feat-ul li{padding:9px 0;border-bottom:1px solid rgba(253,252,251,.07);font-size:.82rem;color:rgba(253,252,251,.65);display:flex;align-items:center;gap:11px}
+/* ── FEATURED ── */
+.feature{display:grid;grid-template-columns:45fr 55fr;min-height:min(90vh,820px);position:relative}
+.feat-body{background:var(--dark);color:var(--w);padding:clamp(64px,8vw,120px) clamp(40px,6vw,90px);display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.feat-bgw{font-size:clamp(7rem,14vw,18rem);color:rgba(201,169,110,.04);top:5%;left:-10%;animation:d1 70s ease-in-out infinite}
+.feat-h2{font-size:clamp(2.2rem,4.5vw,4.5rem);margin-bottom:20px;position:relative;z-index:1}
+.feat-h2 em{font-family:var(--fi);font-style:italic;text-transform:none;letter-spacing:-.01em;font-size:1.15em}
+.feat-p{font-family:var(--fb);color:rgba(253,252,251,.55);font-size:.87rem;line-height:1.86;margin-bottom:34px;max-width:380px;position:relative;z-index:1}
+.feat-ul{list-style:none;margin-bottom:40px;position:relative;z-index:1}
+.feat-ul li{padding:9px 0;border-bottom:1px solid rgba(253,252,251,.07);font-family:var(--fb);font-size:.8rem;color:rgba(253,252,251,.6);display:flex;align-items:center;gap:11px}
 .feat-ul li::before{content:'';width:20px;height:1px;background:var(--g);flex-shrink:0}
 .feat-img{background:var(--c2);background-image:url('images/feature.jpg');background-size:cover;background-position:center;position:relative;overflow:hidden}
-.feat-img-mono{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--fd);font-size:clamp(6rem,12vw,12rem);font-weight:300;font-style:italic;color:rgba(201,169,110,.08);pointer-events:none;user-select:none}
+.feat-img-bg{font-size:clamp(6rem,12vw,14rem);color:rgba(201,169,110,.07);top:55%;right:-8%;animation:d2 55s ease-in-out infinite}
 
 /* ── GALLERY ── */
 .gal-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:220px 220px 220px;gap:3px;margin-top:clamp(40px,5vw,64px)}
@@ -176,122 +205,123 @@ h1.hero-h1{font-size:clamp(5rem,12vw,13rem);letter-spacing:-.04em;line-height:.9
 .g:nth-child(7){grid-column:9/13;grid-row:3/4}
 .g img{width:100%;height:100%;object-fit:cover;transition:transform 5s var(--e)}
 .g:hover img{transform:scale(1.07)}
-.g-lbl{position:absolute;bottom:0;left:0;right:0;padding:18px;background:linear-gradient(transparent,rgba(27,23,18,.62));font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(253,252,251,.85);transform:translateY(100%);transition:transform .38s var(--e)}
+.g-lbl{position:absolute;bottom:0;left:0;right:0;padding:16px;background:linear-gradient(transparent,rgba(26,20,16,.62));font-family:var(--fh);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(253,252,251,.85);transform:translateY(100%);transition:transform .38s var(--e)}
 .g:hover .g-lbl{transform:translateY(0)}
-.g-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-style:italic;font-size:clamp(2rem,5vw,5rem);font-weight:300;color:rgba(201,169,110,.13);pointer-events:none}
+.g-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--fi);font-style:italic;font-size:clamp(2rem,5vw,6rem);font-weight:300;color:rgba(201,169,110,.12);pointer-events:none}
 
 /* ── ABOUT ── */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,100px);align-items:start}
+.about-grid{display:grid;grid-template-columns:55fr 45fr;gap:clamp(40px,6vw,96px);align-items:start;position:relative;z-index:1}
+.about-bgw{font-size:clamp(8rem,18vw,22rem);color:rgba(26,20,16,.025);top:15%;left:-8%;animation:d3 60s ease-in-out infinite}
 .about-photo-wrap{position:relative}
 .about-photo{width:100%;aspect-ratio:3/4;background:var(--c3);background-image:url('images/about.jpg');background-size:cover;background-position:top;overflow:hidden;position:relative}
-.about-photo::before{content:'K';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--fd);font-size:clamp(7rem,14vw,14rem);font-weight:300;font-style:italic;color:rgba(201,169,110,.1);pointer-events:none}
-/* float anim on scroll-in */
-.about-photo.av img{animation:floatY 8s ease-in-out infinite}
-@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.about-frame{position:absolute;inset:26px -26px -26px 26px;border:1.5px solid rgba(201,169,110,.28);pointer-events:none;z-index:-1}
-.about-accent{position:absolute;bottom:-36px;right:-36px;width:52%;aspect-ratio:4/3;background:var(--c2);background-image:url('images/about2.jpg');background-size:cover;border:5px solid var(--c)}
+.about-photo::before{content:'K';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--fi);font-size:clamp(7rem,14vw,14rem);font-weight:300;font-style:italic;color:rgba(201,169,110,.1);pointer-events:none}
+/* float animation after scroll-in */
+.about-photo.av{animation:imgFloat 9s ease-in-out infinite}
+@keyframes imgFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.about-frame{position:absolute;inset:24px -24px -24px 24px;border:1.5px solid rgba(201,169,110,.28);pointer-events:none;z-index:-1}
+.about-accent{position:absolute;bottom:-32px;right:-32px;width:50%;aspect-ratio:4/3;background:var(--c2);background-image:url('images/about2.jpg');background-size:cover;border:5px solid var(--c)}
 
-.about-txt{padding-top:32px}
-.about-h2{font-size:clamp(2rem,4.5vw,3.8rem);margin-bottom:24px}
-.about-h2 em{font-style:italic;color:var(--gd)}
-.about-p{font-size:.88rem;line-height:1.85;color:var(--mu);margin-bottom:16px;max-width:440px}
-.about-sig{font-family:var(--fd);font-style:italic;font-size:clamp(1.1rem,2vw,1.6rem);font-weight:300;color:var(--ink2);margin:28px 0;padding-left:18px;border-left:2px solid var(--g);line-height:1.45}
-.ab-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid rgba(27,23,18,.1);margin-top:36px}
-.abst{padding:22px 0;border-right:1px solid rgba(27,23,18,.1)}
+.about-txt{padding-top:28px}
+.about-h2{font-size:clamp(2rem,4vw,3.6rem);margin-bottom:24px}
+.about-p{font-family:var(--fb);font-size:.87rem;line-height:1.86;color:var(--mu);margin-bottom:15px;max-width:440px}
+.about-sig{font-family:var(--fi);font-style:italic;font-size:clamp(1.1rem,2vw,1.6rem);font-weight:300;color:var(--ink);margin:28px 0;padding-left:18px;border-left:2px solid var(--g);line-height:1.45}
+.abst-row{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(26,20,16,.1);margin-top:36px}
+.abst{padding:22px 0;border-right:1px solid rgba(26,20,16,.1)}
 .abst:last-child{border-right:none}
 .abst:not(:first-child){padding-left:22px}
-.abst-n{display:block;font-family:var(--fd);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;line-height:1}
-.abst-l{display:block;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mu);margin-top:4px}
+.abst-n{display:block;font-family:var(--fh);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;letter-spacing:.04em;line-height:1}
+.abst-l{display:block;font-family:var(--fb);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mu);margin-top:5px}
 
-/* ── WHY ── */
-.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,3.5vw,56px);margin-top:clamp(44px,5.5vw,72px)}
-.why-i{}
-.why-icon{width:42px;height:42px;border:1px solid rgba(201,169,110,.5);display:flex;align-items:center;justify-content:center;margin-bottom:22px}
-.why-icon-d{width:14px;height:14px;background:var(--g);opacity:.6}
-.why-h3{font-family:var(--fd);font-size:clamp(1.1rem,1.8vw,1.55rem);margin-bottom:10px}
-.why-p{font-size:.83rem;line-height:1.82;color:var(--mu)}
+/* ── WHY US ── */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,3.5vw,52px);margin-top:clamp(44px,5.5vw,70px)}
+.why-icon{width:40px;height:40px;border:1px solid rgba(201,169,110,.45);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.why-icon-d{width:12px;height:12px;background:var(--g);opacity:.6}
+.why-h3{font-size:clamp(1rem,1.6vw,1.35rem);margin-bottom:10px}
+.why-p{font-family:var(--fb);font-size:.82rem;line-height:1.84;color:var(--mu)}
 
-/* ── NUMBERS BAND ── */
-.nums{background:var(--c2);padding:clamp(56px,7vw,88px) clamp(24px,5vw,72px);display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
-.num-cell{background:var(--c);padding:clamp(28px,4vw,48px) clamp(20px,3vw,36px);position:relative;overflow:hidden}
-.num-cell::before{content:attr(data-n);position:absolute;bottom:-20px;right:8px;font-family:var(--fd);font-size:clamp(5rem,9vw,10rem);font-weight:300;color:rgba(27,23,18,.04);line-height:1;pointer-events:none}
-.num-big{font-family:var(--fd);font-size:clamp(2.5rem,5vw,5rem);font-weight:300;line-height:1;margin-bottom:8px}
-.num-lbl{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mu);max-width:160px}
+/* ── NUMBERS ── */
+.nums{background:var(--c2);display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.nc{background:var(--c);padding:clamp(30px,4vw,50px) clamp(20px,3vw,36px);position:relative;overflow:hidden}
+.nc::before{content:attr(data-n);position:absolute;bottom:-18px;right:6px;font-family:var(--fi);font-size:clamp(5rem,9vw,11rem);font-weight:300;font-style:italic;color:rgba(26,20,16,.04);line-height:1;pointer-events:none}
+.nc-big{font-family:var(--fh);font-size:clamp(2.4rem,4.5vw,4.5rem);font-weight:300;letter-spacing:.04em;line-height:1;margin-bottom:8px}
+.nc-lbl{font-family:var(--fb);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:var(--mu);max-width:160px}
 
 /* ── TESTIMONIALS ── */
-.testi-inner{max-width:840px;margin:0 auto;text-align:center}
-.t-hd{margin-bottom:clamp(44px,6vw,72px)}
+/* editorial single-quote, full viewport feel */
+.testi{min-height:70vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.testi-bgw{font-size:clamp(10rem,22vw,28rem);color:rgba(26,20,16,.025);top:50%;left:50%;transform:translate(-50%,-50%);animation:spin 90s linear infinite;transform-origin:center}
+.testi-bgw2{font-size:clamp(7rem,14vw,18rem);color:rgba(201,169,110,.04);bottom:0%;right:-5%;animation:spinr 70s linear infinite;transform-origin:center}
+.testi-inner{position:relative;z-index:1;max-width:840px;text-align:center;width:100%}
+.t-hd{margin-bottom:clamp(40px,5vw,64px)}
 .t-hd .ey{justify-content:center}
 .t-hd .ey::before{display:none}
-.t-hd h2{font-size:clamp(2rem,4.5vw,4rem)}
+.t-hd h2{font-size:clamp(2rem,4vw,3.5rem)}
 .t-slide{display:none;flex-direction:column;align-items:center}
 .t-slide.on{display:flex;animation:tIn .55s var(--e) both}
 @keyframes tIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.t-stars{color:var(--g);letter-spacing:5px;font-size:.88rem;margin-bottom:26px}
-.t-q{font-family:var(--fd);font-style:italic;font-weight:300;font-size:clamp(1.2rem,3vw,2.1rem);line-height:1.56;color:var(--ink);margin-bottom:28px;max-width:640px}
-.t-auth{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mu)}
+.t-stars{color:var(--g);letter-spacing:5px;font-size:.85rem;margin-bottom:24px}
+.t-q{font-family:var(--fi);font-style:italic;font-weight:300;font-size:clamp(1.3rem,3.2vw,2.3rem);line-height:1.55;color:var(--ink);margin-bottom:28px;max-width:660px}
+.t-auth{font-family:var(--fh);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mu)}
 .t-ctrl{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:40px}
-.t-btn{width:36px;height:36px;border:1px solid rgba(27,23,18,.18);background:transparent;color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:background .3s,border-color .3s,color .3s}
+.t-btn{width:36px;height:36px;border:1px solid rgba(26,20,16,.18);background:transparent;color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:.88rem;transition:background .3s,border-color .3s,color .3s}
 .t-btn:hover{background:var(--gd);border-color:var(--gd);color:var(--w)}
 .t-dots{display:flex;gap:6px}
-.t-dot{width:5px;height:5px;border-radius:50%;background:rgba(27,23,18,.15);cursor:none;transition:background .3s,transform .3s}
-.t-dot.on{background:var(--gd);transform:scale(1.4)}
+.t-dot{width:5px;height:5px;border-radius:50%;background:rgba(26,20,16,.15);cursor:none;transition:background .3s,transform .3s}
+.t-dot.on{background:var(--gd);transform:scale(1.5)}
 
 /* ── PROCESS ── */
-.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:clamp(44px,5.5vw,72px)}
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:clamp(44px,5.5vw,70px)}
 .proc-i{background:var(--c2);padding:clamp(26px,3.5vw,44px) clamp(20px,3vw,36px);position:relative;overflow:hidden}
-.proc-bg{position:absolute;bottom:-16px;right:10px;font-family:var(--fd);font-size:clamp(4rem,8vw,9rem);font-weight:300;color:rgba(27,23,18,.04);line-height:1;pointer-events:none}
-.proc-n{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gd);margin-bottom:14px}
-.proc-h3{font-family:var(--fd);font-size:clamp(1.2rem,1.9vw,1.65rem);margin-bottom:12px}
-.proc-p{font-size:.8rem;line-height:1.76;color:var(--mu)}
+.proc-bg{position:absolute;bottom:-16px;right:8px;font-family:var(--fi);font-size:clamp(4rem,8vw,10rem);font-weight:300;font-style:italic;color:rgba(26,20,16,.04);line-height:1;pointer-events:none}
+.proc-n{font-family:var(--fh);font-size:.58rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gd);margin-bottom:16px}
+.proc-h3{font-size:clamp(1.1rem,1.8vw,1.55rem);margin-bottom:12px}
+.proc-p{font-family:var(--fb);font-size:.8rem;line-height:1.78;color:var(--mu)}
 
 /* ── FAQ ── */
-.faq-list{border-top:1px solid rgba(27,23,18,.1);margin-top:clamp(36px,4.5vw,60px)}
-.faq-i{border-bottom:1px solid rgba(27,23,18,.08)}
-.faq-q{width:100%;background:none;border:none;display:flex;align-items:center;justify-content:space-between;padding:20px 0;font-family:var(--fd);font-size:clamp(.95rem,1.8vw,1.3rem);font-weight:400;color:var(--ink);text-align:left;letter-spacing:-.01em;gap:16px}
-.faq-ic{width:22px;height:22px;border:1px solid rgba(27,23,18,.22);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.68rem;color:var(--ink);transition:background .3s,border-color .3s,transform .4s}
+.faq-list{border-top:1px solid rgba(26,20,16,.1);margin-top:clamp(36px,4.5vw,60px)}
+.faq-i{border-bottom:1px solid rgba(26,20,16,.08)}
+.faq-q{width:100%;background:none;border:none;display:flex;align-items:center;justify-content:space-between;padding:20px 0;font-family:var(--fh);font-size:clamp(.85rem,1.6vw,1.18rem);font-weight:400;letter-spacing:.05em;text-transform:uppercase;color:var(--ink);text-align:left;gap:16px}
+.faq-ic{width:22px;height:22px;border:1px solid rgba(26,20,16,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.65rem;transition:background .3s,border-color .3s,transform .4s}
 .faq-i.open .faq-ic{background:var(--gd);border-color:var(--gd);color:var(--w);transform:rotate(45deg)}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .5s var(--e)}
-.faq-ai{padding-bottom:18px;font-size:.85rem;line-height:1.82;color:var(--mu);max-width:720px}
-.faq-i.open .faq-a{max-height:240px}
+.faq-ai{padding-bottom:18px;font-family:var(--fb);font-size:.84rem;line-height:1.84;color:var(--mu);max-width:720px}
+.faq-i.open .faq-a{max-height:260px}
 
 /* ── CTA ── */
-.cta{background:var(--dark);color:var(--w)}
-.cta .ey{justify-content:center}
-.cta .ey::before{display:none}
-.cta-inner{text-align:center}
-.cta-h2{font-size:clamp(2.8rem,7vw,7.5rem);line-height:1.05;margin-bottom:48px}
+.cta{background:var(--dark);color:var(--w);position:relative;overflow:hidden}
+.cta-bgw1{font-size:clamp(9rem,20vw,26rem);color:rgba(201,169,110,.04);top:5%;left:-10%;animation:d3 60s ease-in-out infinite}
+.cta-bgw2{font-size:clamp(7rem,16vw,20rem);color:rgba(201,169,110,.03);bottom:-5%;right:-8%;animation:d2 75s ease-in-out infinite}
+.cta-inner{position:relative;z-index:1;text-align:center}
+.cta-inner .ey{justify-content:center}
+.cta-inner .ey::before{display:none}
+.cta-h2{font-size:clamp(2.8rem,7vw,7.5rem);line-height:1.02;margin-bottom:48px}
 .cta-contacts{display:flex;justify-content:center;gap:clamp(20px,5vw,80px);flex-wrap:wrap;margin-bottom:48px}
 .cta-ci{display:flex;flex-direction:column;gap:6px;align-items:center}
-.cta-ct{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(253,252,251,.35)}
-.cta-cv{font-family:var(--fd);font-size:clamp(1.05rem,2.2vw,1.7rem);font-weight:300;color:var(--w);text-decoration:none;transition:color .3s}
+.cta-ct{font-family:var(--fh);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(253,252,251,.32)}
+.cta-cv{font-family:var(--fi);font-size:clamp(1.1rem,2.2vw,1.8rem);font-weight:300;font-style:italic;color:var(--w);text-decoration:none;transition:color .3s}
 .cta-cv:hover{color:var(--g)}
 
 /* ── FOOTER ── */
 footer{background:var(--dark);color:var(--w);border-top:1px solid rgba(253,252,251,.05)}
 .f-top{padding:clamp(52px,7vw,84px) clamp(24px,5vw,72px);display:grid;grid-template-columns:1fr 2fr 1fr;gap:48px;align-items:start}
-.f-logo{font-family:var(--fd);font-size:clamp(1.5rem,3vw,2.6rem);font-weight:300;letter-spacing:.09em}
-.f-sub{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(253,252,251,.3);margin-top:3px}
-.f-navgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-.f-ng h4{font-family:var(--fb);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(253,252,251,.3);margin-bottom:14px}
+.f-logo{font-family:var(--fh);font-size:clamp(1.4rem,2.8vw,2.4rem);font-weight:400;letter-spacing:.1em;text-transform:uppercase}
+.f-sub{font-family:var(--fb);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(253,252,251,.3);margin-top:4px}
+.f-ngrid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.f-ng h4{font-family:var(--fh);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(253,252,251,.28);margin-bottom:14px}
 .f-ng ul{list-style:none}
 .f-ng li{margin-bottom:7px}
-.f-ng a{text-decoration:none;font-size:.8rem;color:rgba(253,252,251,.5);transition:color .3s}
+.f-ng a{font-family:var(--fb);text-decoration:none;font-size:.8rem;color:rgba(253,252,251,.45);transition:color .3s}
 .f-ng a:hover{color:var(--g)}
 .f-soc{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
-.f-soc a{font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;color:rgba(253,252,251,.4);text-decoration:none;transition:color .3s}
+.f-soc a{font-family:var(--fh);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(253,252,251,.38);text-decoration:none;transition:color .3s}
 .f-soc a:hover{color:var(--g)}
 .f-bot{padding:18px clamp(24px,5vw,72px);border-top:1px solid rgba(253,252,251,.05);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
-.f-copy{font-size:.58rem;letter-spacing:.1em;color:rgba(253,252,251,.2)}
+.f-copy{font-family:var(--fb);font-size:.58rem;letter-spacing:.1em;color:rgba(253,252,251,.2)}
 
 /* ── RESPONSIVE ── */
-@media(max-width:1200px){
-  .gal-grid{grid-template-rows:180px 180px 180px}
-}
 @media(max-width:1024px){
   .hero{grid-template-columns:1fr}
   .hero-right{display:none}
-  .hero-left{padding-bottom:clamp(60px,8vh,96px)}
   .srv-hd{grid-template-columns:1fr}
   .feature{grid-template-columns:1fr}
   .feat-img{min-height:56vw}
@@ -300,22 +330,21 @@ footer{background:var(--dark);color:var(--w);border-top:1px solid rgba(253,252,2
   .why-grid{grid-template-columns:1fr 1fr}
   .proc-grid{grid-template-columns:1fr 1fr}
   .nums{grid-template-columns:1fr 1fr}
-  .gal-grid{grid-template-columns:1fr 1fr 1fr;grid-template-rows:auto}
-  .g{grid-column:auto!important;grid-row:auto!important;min-height:200px}
+  .gal-grid{grid-template-rows:180px 180px 180px}
   .f-top{grid-template-columns:1fr 1fr}
   .f-soc{display:none}
 }
 @media(max-width:768px){
   body{cursor:auto}
   #dot,#ring{display:none}
-  .nav-links{display:none}
-  .nav-btn{display:none}
+  .nav-links,.nav-btn{display:none}
   .why-grid{grid-template-columns:1fr}
   .proc-grid{grid-template-columns:1fr}
   .nums{grid-template-columns:1fr 1fr}
   .gal-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .g{grid-column:auto!important;grid-row:auto!important;min-height:180px}
   .f-top{grid-template-columns:1fr}
-  .f-navgrid{grid-template-columns:1fr 1fr}
+  .f-ngrid{grid-template-columns:1fr 1fr}
   .f-bot{flex-direction:column;text-align:center}
 }
 </style>
@@ -323,22 +352,19 @@ footer{background:var(--dark);color:var(--w);border-top:1px solid rgba(253,252,2
 <body>
 
 <!-- LOADER -->
-<div id="ldr" style="position:fixed;inset:0;background:var(--c);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity 1s var(--e),visibility 1s">
-  <div style="font-family:var(--fd);font-size:clamp(2rem,5vw,3.5rem);font-weight:300;letter-spacing:.18em;animation:shimmer 3s linear infinite,fadeU .9s var(--e) both;background:linear-gradient(90deg,var(--gd),var(--gl),var(--gll),var(--gl),var(--gd));background-size:300% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">La Passione</div>
-  <div id="lline" style="width:0;height:1px;background:linear-gradient(90deg,transparent,var(--g),transparent);transition:width 1.4s var(--e) .3s"></div>
+<div id="ldr" style="position:fixed;inset:0;background:var(--c);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity 1s,visibility 1s">
+  <div style="font-family:'Josefin Sans',sans-serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:300;letter-spacing:.22em;text-transform:uppercase;animation:shimmer 3s linear infinite,lFade .9s ease both;background:linear-gradient(90deg,#8A6830,#E6C88C,#F4E8CC,#E6C88C,#8A6830);background-size:300% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">La Passione</div>
+  <div id="ll" style="width:0;height:1px;background:linear-gradient(90deg,transparent,#C9A96E,transparent);transition:width 1.4s cubic-bezier(.16,1,.3,1) .3s"></div>
 </div>
-<style>@keyframes fadeU{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}</style>
+<style>@keyframes lFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}</style>
 
-<!-- PROGRESS -->
 <div id="prog"></div>
-
-<!-- CURSOR -->
 <div id="dot"></div>
 <div id="ring"></div>
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="#" class="nav-logo">La <em>Passione</em></a>
+  <a href="#" class="nl">La Passione</a>
   <ul class="nav-links">
     <li><a href="#uslugi">Usługi</a></li>
     <li><a href="#galeria">Galeria</a></li>
@@ -349,86 +375,89 @@ footer{background:var(--dark);color:var(--w);border-top:1px solid rgba(253,252,2
   <a href="#rezerwacja" class="nav-btn">Rezerwacja</a>
 </nav>
 
-<!-- ═══ HERO ═══ -->
+<!-- ═══════════════ HERO ═══════════════ -->
 <section class="hero" id="top">
-  <div class="hero-bgword">Passione</div>
+  <div class="bgw hero-bgw">Passione</div>
   <div class="hero-left">
-    <div class="hero-eyebrow">
-      <span class="hero-lbl" id="hl">Studio Urody · Karolina Da Corso</span>
-      <span class="hero-rule" id="hr"></span>
+    <div class="hero-ey">
+      <span class="h-lbl" id="hl">Studio Urody · Karolina Da Corso</span>
+      <span class="h-rule" id="hr"></span>
     </div>
-    <h1 class="hero-h1">
+    <h1 class="h1">
       <span class="w ga" id="hw0">La</span>
       <span class="w" id="hw1">Passione</span>
     </h1>
-    <p class="hero-tag" id="ht">Precyzja &nbsp;·&nbsp; Elegancja &nbsp;·&nbsp; Pasja</p>
-    <div class="hero-btm" id="hb">
+    <p class="h-tag" id="ht">Precyzja &nbsp;·&nbsp; Elegancja &nbsp;·&nbsp; Pasja</p>
+    <div class="h-btm" id="hb">
       <a href="#rezerwacja" class="btn">Zarezerwuj wizytę <span class="arr">→</span></a>
-      <span class="hero-aside">Każda klientka zasługuje na wyjątkowe doświadczenie</span>
+      <span class="h-aside">Każda klientka zasługuje na wyjątkowe doświadczenie</span>
     </div>
   </div>
   <div class="hero-right">
     <div class="hero-photo"></div>
-    <div class="hero-photo-mono">K</div>
+    <div class="hero-photo-k">K</div>
   </div>
-  <div class="scroll-hint">
-    <span>Scroll</span>
-    <div class="scroll-bar"></div>
-  </div>
+  <div class="scroll-h"><span>Scroll</span><div class="scroll-bar"></div></div>
 </section>
 
 <!-- MARQUEE 1 -->
 <div class="mq">
-  <div class="mq-inner">
-    <span class="mq-i">La Passione</span><span class="mq-sep">·</span>
-    <span class="mq-i">Studio Urody</span><span class="mq-sep">·</span>
-    <span class="mq-i">Karolina Da Corso</span><span class="mq-sep">·</span>
-    <span class="mq-i">Medycyna Estetyczna</span><span class="mq-sep">·</span>
-    <span class="mq-i">Luksusowa Pielęgnacja</span><span class="mq-sep">·</span>
-    <span class="mq-i">La Passione</span><span class="mq-sep">·</span>
-    <span class="mq-i">Studio Urody</span><span class="mq-sep">·</span>
-    <span class="mq-i">Karolina Da Corso</span><span class="mq-sep">·</span>
-    <span class="mq-i">Medycyna Estetyczna</span><span class="mq-sep">·</span>
-    <span class="mq-i">Luksusowa Pielęgnacja</span><span class="mq-sep">·</span>
+  <div class="mqi">
+    <span class="mq-i">La Passione</span><span class="mq-dot">·</span>
+    <span class="mq-i">Studio Urody</span><span class="mq-dot">·</span>
+    <span class="mq-i">Karolina Da Corso</span><span class="mq-dot">·</span>
+    <span class="mq-i">Medycyna Estetyczna</span><span class="mq-dot">·</span>
+    <span class="mq-i">Luksusowa Pielęgnacja</span><span class="mq-dot">·</span>
+    <span class="mq-i">La Passione</span><span class="mq-dot">·</span>
+    <span class="mq-i">Studio Urody</span><span class="mq-dot">·</span>
+    <span class="mq-i">Karolina Da Corso</span><span class="mq-dot">·</span>
+    <span class="mq-i">Medycyna Estetyczna</span><span class="mq-dot">·</span>
+    <span class="mq-i">Luksusowa Pielęgnacja</span><span class="mq-dot">·</span>
   </div>
 </div>
 
-<!-- ═══ FILOZOFIA ═══ -->
-<section class="sec ah" id="filozofia">
-  <div class="ey ah"><span class="sec-lbl">Nasza filozofia</span></div>
-  <blockquote class="phil-q ah">
-    „Piękno to nie kwestia wyglądu — to sposób, w jaki czujesz się we własnej skórze. <em class="gx">La Passione</em> istnieje po to, żebyś czuła się sobą — tylko najlepszą wersją siebie."
-  </blockquote>
-  <div class="phil-attr ah">
-    <span>Karolina Da Corso, Założycielka</span>
+<!-- ═══════════════ FILOZOFIA — full-vp editorial ═══════════════ -->
+<section class="sec phil" id="filozofia">
+  <div class="bgw phil-bgw1">Piękno</div>
+  <div class="bgw phil-bgw2">Passione</div>
+  <div class="phil-inner">
+    <div class="ey ah"><span class="slbl">Nasza filozofia</span></div>
+    <blockquote class="phil-q ah">
+      „Piękno to nie kwestia wyglądu — to sposób, w jaki czujesz się we własnej skórze. <em>La Passione</em> istnieje po to, żebyś czuła się sobą — tylko najlepszą wersją siebie."
+    </blockquote>
+    <div class="phil-attr ah">
+      <span>Karolina Da Corso, Założycielka</span>
+    </div>
   </div>
 </section>
 
-<!-- ═══ USŁUGI ═══ -->
+<!-- ═══════════════ USŁUGI ═══════════════ -->
 <section class="sec sec--alt" id="uslugi">
+  <div class="bgw srv-bgw">Beauty</div>
   <div class="srv-hd">
     <div>
-      <div class="ey ah"><span class="sec-lbl">Nasze zabiegi</span></div>
-      <h2 class="ah">08 sposobów<br>na <em>twoje</em> piękno</h2>
+      <div class="ey ah"><span class="slbl">Nasze zabiegi</span></div>
+      <h2 class="ah">08 sposobów<br>na twoje piękno</h2>
     </div>
-    <p class="srv-hd-txt ah">Szerokie spectrum zabiegów — od precyzyjnej medycyny estetycznej po rytuały pielęgnacyjne, które odnawiają i wzmacniają.</p>
+    <p class="srv-hd-p ah">Szerokie spectrum zabiegów — od precyzyjnej medycyny estetycznej po rytuały pielęgnacyjne, które odnawiają i wzmacniają.</p>
   </div>
   <div class="srv-list">
-    <div class="srv-item ah"><div class="srv-num">01</div><div><div class="srv-cat">Medycyna Estetyczna</div><div class="srv-name">Botoks</div><div class="srv-sub">Twarzy · Lifting nosa · Bruksizm</div></div><div class="srv-arr">→</div></div>
-    <div class="srv-item ah"><div class="srv-num">02</div><div><div class="srv-cat">Modelowanie</div><div class="srv-name">Wypełniacze</div><div class="srv-sub">Usta · Policzki · Broda i żuchwa</div></div><div class="srv-arr">→</div></div>
-    <div class="srv-item ah"><div class="srv-num">03</div><div><div class="srv-cat">Regeneracja</div><div class="srv-name">Mezoterapia</div><div class="srv-sub">Igłowa · Koktajle witaminowe · Biorewitalizacja</div></div><div class="srv-arr">→</div></div>
-    <div class="srv-item ah"><div class="srv-num">04</div><div><div class="srv-cat">Stylizacja</div><div class="srv-name">Laminacja brwi</div><div class="srv-sub">+ Henna · Regulacja · Korekta koloru</div></div><div class="srv-arr">→</div></div>
-    <div class="srv-item ah"><div class="srv-num">05</div><div><div class="srv-cat">Stylizacja</div><div class="srv-name">Stylizacja rzęs</div><div class="srv-sub">Przedłużanie · Lash lift · Volume</div></div><div class="srv-arr">→</div></div>
-    <div class="srv-item ah"><div class="srv-num">06</div><div><div class="srv-cat">Paznokcie</div><div class="srv-name">Manicure</div><div class="srv-sub">Japoński · Hybryda · Żelowe przedłużanie</div></div><div class="srv-arr">→</div></div>
-    <div class="srv-item ah"><div class="srv-num">07</div><div><div class="srv-cat">Paznokcie</div><div class="srv-name">Pedicure</div><div class="srv-sub">SPA · Hybryda · Parafina</div></div><div class="srv-arr">→</div></div>
-    <div class="srv-item ah"><div class="srv-num">08</div><div><div class="srv-cat">Pielęgnacja</div><div class="srv-name">Zabiegi na twarz</div><div class="srv-sub">Oczyszczanie · Nawilżenie · Anti-aging</div></div><div class="srv-arr">→</div></div>
+    <div class="srv-item ah"><div class="srv-n">01</div><div><div class="srv-cat">Medycyna Estetyczna</div><div class="srv-name">Botoks</div><div class="srv-sub">Twarzy · Lifting nosa · Bruksizm</div></div><div class="srv-arr">→</div></div>
+    <div class="srv-item ah"><div class="srv-n">02</div><div><div class="srv-cat">Modelowanie</div><div class="srv-name">Wypełniacze</div><div class="srv-sub">Usta · Policzki · Broda i żuchwa</div></div><div class="srv-arr">→</div></div>
+    <div class="srv-item ah"><div class="srv-n">03</div><div><div class="srv-cat">Regeneracja</div><div class="srv-name">Mezoterapia</div><div class="srv-sub">Igłowa · Koktajle witaminowe · Biorewitalizacja</div></div><div class="srv-arr">→</div></div>
+    <div class="srv-item ah"><div class="srv-n">04</div><div><div class="srv-cat">Stylizacja</div><div class="srv-name">Laminacja brwi</div><div class="srv-sub">+ Henna · Regulacja · Korekta koloru</div></div><div class="srv-arr">→</div></div>
+    <div class="srv-item ah"><div class="srv-n">05</div><div><div class="srv-cat">Stylizacja</div><div class="srv-name">Stylizacja rzęs</div><div class="srv-sub">Przedłużanie · Lash lift · Volume</div></div><div class="srv-arr">→</div></div>
+    <div class="srv-item ah"><div class="srv-n">06</div><div><div class="srv-cat">Paznokcie</div><div class="srv-name">Manicure</div><div class="srv-sub">Japoński · Hybryda · Żelowe przedłużanie</div></div><div class="srv-arr">→</div></div>
+    <div class="srv-item ah"><div class="srv-n">07</div><div><div class="srv-cat">Paznokcie</div><div class="srv-name">Pedicure</div><div class="srv-sub">SPA · Hybryda · Parafina</div></div><div class="srv-arr">→</div></div>
+    <div class="srv-item ah"><div class="srv-n">08</div><div><div class="srv-cat">Pielęgnacja</div><div class="srv-name">Zabiegi na twarz</div><div class="srv-sub">Oczyszczanie · Nawilżenie · Anti-aging</div></div><div class="srv-arr">→</div></div>
   </div>
 </section>
 
-<!-- ═══ FEATURED TREATMENT ═══ -->
+<!-- ═══════════════ FEATURED TREATMENT ═══════════════ -->
 <section class="feature">
   <div class="feat-body">
-    <div class="ey ah"><span class="sec-lbl">Zabieg miesiąca</span></div>
+    <div class="bgw feat-bgw">Elegancja</div>
+    <div class="ey ah"><span class="slbl">Zabieg miesiąca</span></div>
     <h2 class="feat-h2 ah">Biorewitalizacja<br><em>twarzy</em></h2>
     <p class="feat-p ah">Głęboka regeneracja skóry od wewnątrz. Łączy najnowocześniejsze preparaty z precyzyjną techniką iniekcji — przywraca młodość, sprężystość i blask.</p>
     <ul class="feat-ul ah">
@@ -440,14 +469,14 @@ footer{background:var(--dark);color:var(--w);border-top:1px solid rgba(253,252,2
     <a href="#rezerwacja" class="btn btn-inv ah">Zarezerwuj zabieg <span class="arr">→</span></a>
   </div>
   <div class="feat-img ahr">
-    <div class="feat-img-mono">LP</div>
+    <div class="bgw feat-img-bg">LP</div>
   </div>
 </section>
 
-<!-- ═══ GALERIA ═══ -->
+<!-- ═══════════════ GALERIA ═══════════════ -->
 <section class="sec" id="galeria">
-  <div class="ey ah"><span class="sec-lbl">Galeria</span></div>
-  <h2 class="ah" style="font-size:clamp(2rem,4.5vw,4rem);margin-bottom:0">Chwile piękna</h2>
+  <div class="ey ah"><span class="slbl">Galeria</span></div>
+  <h2 class="ah" style="font-size:clamp(2rem,4.5vw,4rem)">Chwile piękna</h2>
   <div class="gal-grid">
     <div class="g ahc"><img src="images/g1.jpg" alt="" onerror="this.remove()"><div class="g-ph">01</div><div class="g-lbl">Laminacja brwi</div></div>
     <div class="g ahc"><img src="images/g2.jpg" alt="" onerror="this.remove()"><div class="g-ph">02</div><div class="g-lbl">Zabiegi na twarz</div></div>
@@ -459,21 +488,22 @@ footer{background:var(--dark);color:var(--w);border-top:1px solid rgba(253,252,2
   </div>
 </section>
 
-<!-- ═══ O NAS ═══ -->
+<!-- ═══════════════ O NAS ═══════════════ -->
 <section class="sec sec--alt" id="o-nas">
+  <div class="bgw about-bgw">Karolina</div>
   <div class="about-grid">
-    <div class="about-photo-wrap ahl">
+    <div class="about-photo-wrap ahl" id="aph">
       <div class="about-photo"><img src="images/about.jpg" alt="Karolina Da Corso" onerror="this.remove()"></div>
       <div class="about-frame"></div>
       <div class="about-accent"></div>
     </div>
     <div class="about-txt">
-      <div class="ey ah"><span class="sec-lbl">O Karolinie</span></div>
-      <h2 class="about-h2 ah">Mistrzyni piękna<br><em>z pasją w każdym geście</em></h2>
-      <p class="about-p ah">Karolina Da Corso to kosmetolog i specjalistka medycyny estetycznej z wieloletnim doświadczeniem. Studio La Passione to miejsce, gdzie precyzja spotyka się z delikatnością, a każda klientka jest traktowana z najwyższą uwagą i szacunkiem.</p>
-      <p class="about-p ah">Pasja do piękna, nieustanne poszerzanie wiedzy na prestiżowych szkoleniach w Polsce i Europie, oraz głęboki szacunek do naturalności sprawiają, że efekty jej pracy są zawsze harmonijne i autentyczne.</p>
+      <div class="ey ah"><span class="slbl">O Karolinie</span></div>
+      <h2 class="about-h2 ah">Mistrzyni piękna<br>z pasją</h2>
+      <p class="about-p ah">Karolina Da Corso to kosmetolog i specjalistka medycyny estetycznej z wieloletnim doświadczeniem. Studio La Passione to miejsce, gdzie precyzja spotyka się z delikatnością, a każda klientka traktowana jest z najwyższą uwagą.</p>
+      <p class="about-p ah">Pasja do piękna, nieustanne doskonalenie na prestiżowych szkoleniach oraz szacunek do naturalności sprawiają, że efekty jej pracy są zawsze harmonijne i autentyczne.</p>
       <blockquote class="about-sig ah">„Każda twarz opowiada swoją historię. Moją rolą jest pomóc jej wybrzmieć w pełni."</blockquote>
-      <div class="ab-stats">
+      <div class="abst-row">
         <div class="abst ah"><span class="abst-n" data-target="8" data-suf="+">0</span><span class="abst-l">Lat doświadczenia</span></div>
         <div class="abst ah"><span class="abst-n" data-target="2000" data-suf="+">0</span><span class="abst-l">Klientek</span></div>
         <div class="abst ah"><span class="abst-n" data-target="50" data-suf="+">0</span><span class="abst-l">Zabiegów</span></div>
@@ -482,62 +512,64 @@ footer{background:var(--dark);color:var(--w);border-top:1px solid rgba(253,252,2
   </div>
 </section>
 
-<!-- ═══ DLACZEGO MY ═══ -->
+<!-- ═══════════════ DLACZEGO MY ═══════════════ -->
 <section class="sec">
-  <div class="ey ah"><span class="sec-lbl">Dlaczego La Passione</span></div>
-  <h2 class="ah" style="font-size:clamp(2rem,4.5vw,4rem);max-width:680px">Wyjątkowość, którą poczujesz od pierwszego kroku</h2>
+  <div class="ey ah"><span class="slbl">Dlaczego La Passione</span></div>
+  <h2 class="ah" style="font-size:clamp(2rem,4.5vw,4rem);max-width:640px">Wyjątkowość, którą poczujesz od pierwszego kroku</h2>
   <div class="why-grid">
-    <div class="why-i ah">
+    <div class="ah">
       <div class="why-icon"><div class="why-icon-d"></div></div>
       <h3 class="why-h3">Indywidualne podejście</h3>
-      <p class="why-p">Każda wizyta zaczyna się od dokładnej konsultacji. Nie ma dwóch takich samych zabiegów — każdy jest szyty na miarę Twoich potrzeb i celów.</p>
+      <p class="why-p">Każda wizyta zaczyna się od dokładnej konsultacji. Nie ma dwóch takich samych zabiegów — każdy jest szyty na miarę Twoich potrzeb.</p>
     </div>
-    <div class="why-i ah">
+    <div class="ah">
       <div class="why-icon"><div class="why-icon-d"></div></div>
       <h3 class="why-h3">Certyfikowane preparaty</h3>
-      <p class="why-p">Używamy wyłącznie certyfikowanych preparatów od renomowanych producentów europejskich. Bezpieczeństwo i jakość to nasze absolutne priorytety.</p>
+      <p class="why-p">Używamy wyłącznie certyfikowanych preparatów od renomowanych producentów europejskich. Bezpieczeństwo to priorytet.</p>
     </div>
-    <div class="why-i ah">
+    <div class="ah">
       <div class="why-icon"><div class="why-icon-d"></div></div>
       <h3 class="why-h3">Dyskrecja i komfort</h3>
-      <p class="why-p">Studio La Passione to przestrzeń stworzona z myślą o Twoim komforcie. Prywatność i atmosfera spokoju to wartości, które traktujemy poważnie.</p>
+      <p class="why-p">Studio La Passione to przestrzeń stworzona z myślą o Twoim komforcie. Prywatność i atmosfera spokoju to nasze wartości.</p>
     </div>
   </div>
 </section>
 
-<!-- ═══ LICZBY ═══ -->
+<!-- ═══════════════ LICZBY ═══════════════ -->
 <div class="nums">
-  <div class="num-cell ah" data-n="08"><div class="num-big" data-target="8" data-suf="+">0</div><div class="num-lbl">Lat doświadczenia na rynku beauty</div></div>
-  <div class="num-cell ah" data-n="2K"><div class="num-big" data-target="2000" data-suf="+">0</div><div class="num-lbl">Zadowolonych klientek</div></div>
-  <div class="num-cell ah" data-n="50"><div class="num-big" data-target="50" data-suf="+">0</div><div class="num-lbl">Dostępnych zabiegów</div></div>
-  <div class="num-cell ah" data-n="★"><div class="num-big ga">5.0</div><div class="num-lbl">Średnia ocena klientek</div></div>
+  <div class="nc ah" data-n="08"><div class="nc-big" data-target="8" data-suf="+">0</div><div class="nc-lbl">Lat doświadczenia na rynku beauty</div></div>
+  <div class="nc ah" data-n="2K"><div class="nc-big" data-target="2000" data-suf="+">0</div><div class="nc-lbl">Zadowolonych klientek</div></div>
+  <div class="nc ah" data-n="50"><div class="nc-big" data-target="50" data-suf="+">0</div><div class="nc-lbl">Dostępnych zabiegów</div></div>
+  <div class="nc ah" data-n="★"><div class="nc-big ga">5.0</div><div class="nc-lbl">Średnia ocena klientek</div></div>
 </div>
 
-<!-- MARQUEE 2 (dark) -->
+<!-- MARQUEE 2 dark -->
 <div class="mq mq--dk">
-  <div class="mq-inner mq-r">
-    <span class="mq-i">Laminacja Brwi</span><span class="mq-sep">·</span>
-    <span class="mq-i">Stylizacja Rzęs</span><span class="mq-sep">·</span>
-    <span class="mq-i">Botoks</span><span class="mq-sep">·</span>
-    <span class="mq-i">Wypełniacze</span><span class="mq-sep">·</span>
-    <span class="mq-i">Mezoterapia</span><span class="mq-sep">·</span>
-    <span class="mq-i">Manicure</span><span class="mq-sep">·</span>
-    <span class="mq-i">Pedicure SPA</span><span class="mq-sep">·</span>
-    <span class="mq-i">Laminacja Brwi</span><span class="mq-sep">·</span>
-    <span class="mq-i">Stylizacja Rzęs</span><span class="mq-sep">·</span>
-    <span class="mq-i">Botoks</span><span class="mq-sep">·</span>
-    <span class="mq-i">Wypełniacze</span><span class="mq-sep">·</span>
-    <span class="mq-i">Mezoterapia</span><span class="mq-sep">·</span>
-    <span class="mq-i">Manicure</span><span class="mq-sep">·</span>
-    <span class="mq-i">Pedicure SPA</span><span class="mq-sep">·</span>
+  <div class="mqi mqr">
+    <span class="mq-i">Laminacja Brwi</span><span class="mq-dot">·</span>
+    <span class="mq-i">Stylizacja Rzęs</span><span class="mq-dot">·</span>
+    <span class="mq-i">Botoks</span><span class="mq-dot">·</span>
+    <span class="mq-i">Wypełniacze</span><span class="mq-dot">·</span>
+    <span class="mq-i">Mezoterapia</span><span class="mq-dot">·</span>
+    <span class="mq-i">Manicure</span><span class="mq-dot">·</span>
+    <span class="mq-i">Pedicure SPA</span><span class="mq-dot">·</span>
+    <span class="mq-i">Laminacja Brwi</span><span class="mq-dot">·</span>
+    <span class="mq-i">Stylizacja Rzęs</span><span class="mq-dot">·</span>
+    <span class="mq-i">Botoks</span><span class="mq-dot">·</span>
+    <span class="mq-i">Wypełniacze</span><span class="mq-dot">·</span>
+    <span class="mq-i">Mezoterapia</span><span class="mq-dot">·</span>
+    <span class="mq-i">Manicure</span><span class="mq-dot">·</span>
+    <span class="mq-i">Pedicure SPA</span><span class="mq-dot">·</span>
   </div>
 </div>
 
-<!-- ═══ OPINIE ═══ -->
-<section class="sec" id="opinie">
+<!-- ═══════════════ OPINIE ═══════════════ -->
+<section class="sec testi" id="opinie">
+  <div class="bgw testi-bgw" style="font-size:clamp(10rem,22vw,28rem);color:rgba(26,20,16,.022);top:50%;left:50%;animation:spin 90s linear infinite">Opinie</div>
+  <div class="bgw testi-bgw2" style="font-size:clamp(7rem,14vw,18rem);color:rgba(201,169,110,.038);bottom:-5%;right:-5%;animation:spinr 70s linear infinite">★</div>
   <div class="testi-inner">
     <div class="t-hd">
-      <div class="ey ah"><span class="sec-lbl">Co mówią klientki</span></div>
+      <div class="ey ah"><span class="slbl">Co mówią klientki</span></div>
       <h2 class="ah">Zaufały nam</h2>
     </div>
     <div id="ts">
@@ -565,45 +597,45 @@ footer{background:var(--dark);color:var(--w);border-top:1px solid rgba(253,252,2
     <div class="t-ctrl">
       <button class="t-btn" id="tp">←</button>
       <div class="t-dots">
-        <div class="t-dot on"></div>
-        <div class="t-dot"></div>
-        <div class="t-dot"></div>
-        <div class="t-dot"></div>
+        <div class="t-dot on"></div><div class="t-dot"></div>
+        <div class="t-dot"></div><div class="t-dot"></div>
       </div>
       <button class="t-btn" id="tn">→</button>
     </div>
   </div>
 </section>
 
-<!-- ═══ PROCES ═══ -->
+<!-- ═══════════════ PROCES ═══════════════ -->
 <section class="sec sec--alt2">
-  <div class="ey ah"><span class="sec-lbl">Jak wygląda wizyta</span></div>
-  <h2 class="ah" style="font-size:clamp(2rem,4.5vw,4rem)">Od rezerwacji<br>do rezultatu</h2>
+  <div class="ey ah"><span class="slbl">Jak wygląda wizyta</span></div>
+  <h2 class="ah" style="font-size:clamp(2rem,4.5vw,4rem)">Od rezerwacji do rezultatu</h2>
   <div class="proc-grid">
-    <div class="proc-i ah"><div class="proc-bg">01</div><div class="proc-n">Krok pierwszy</div><h3 class="proc-h3">Rezerwacja</h3><p class="proc-p">Wybierz preferowany termin przez formularz online, telefon lub Instagram. Odpiszemy w ciągu godziny.</p></div>
-    <div class="proc-i ah"><div class="proc-bg">02</div><div class="proc-n">Krok drugi</div><h3 class="proc-h3">Konsultacja</h3><p class="proc-p">Każdą wizytę zaczynamy od rozmowy. Pytamy, słuchamy i ustalamy plan zabiegu dopasowany do Ciebie.</p></div>
-    <div class="proc-i ah"><div class="proc-bg">03</div><div class="proc-n">Krok trzeci</div><h3 class="proc-h3">Zabieg</h3><p class="proc-p">Precyzja, komfort i dbałość o każdy detal — tak wygląda praca Karoliny. Czas zabiegu to Twój czas.</p></div>
-    <div class="proc-i ah"><div class="proc-bg">04</div><div class="proc-n">Krok czwarty</div><h3 class="proc-h3">Opieka</h3><p class="proc-p">Po zabiegu otrzymujesz indywidualne zalecenia pielęgnacyjne. Karolina jest dostępna — pytaj bez obaw.</p></div>
+    <div class="proc-i ah"><div class="proc-bg">01</div><div class="proc-n">Krok pierwszy</div><h3 class="proc-h3">Rezerwacja</h3><p class="proc-p">Wybierz termin online, telefonicznie lub przez Instagram. Odpiszemy w ciągu godziny.</p></div>
+    <div class="proc-i ah"><div class="proc-bg">02</div><div class="proc-n">Krok drugi</div><h3 class="proc-h3">Konsultacja</h3><p class="proc-p">Każdą wizytę zaczynamy od rozmowy. Plan zabiegu zawsze ustalamy wspólnie.</p></div>
+    <div class="proc-i ah"><div class="proc-bg">03</div><div class="proc-n">Krok trzeci</div><h3 class="proc-h3">Zabieg</h3><p class="proc-p">Precyzja i komfort na każdym etapie. Czas zabiegu to Twój czas.</p></div>
+    <div class="proc-i ah"><div class="proc-bg">04</div><div class="proc-n">Krok czwarty</div><h3 class="proc-h3">Opieka</h3><p class="proc-p">Indywidualne zalecenia po zabiegu. Karolina jest zawsze dostępna — pytaj bez obaw.</p></div>
   </div>
 </section>
 
-<!-- ═══ FAQ ═══ -->
+<!-- ═══════════════ FAQ ═══════════════ -->
 <section class="sec" id="faq">
-  <div class="ey ah"><span class="sec-lbl">Najczęstsze pytania</span></div>
+  <div class="ey ah"><span class="slbl">Najczęstsze pytania</span></div>
   <h2 class="ah" style="font-size:clamp(2rem,4.5vw,4rem)">FAQ</h2>
   <div class="faq-list">
     <div class="faq-i ah"><button class="faq-q">Czy zabiegi medycyny estetycznej bolą?<span class="faq-ic">+</span></button><div class="faq-a"><div class="faq-ai">Większość zabiegów jest przeprowadzana z użyciem kremów znieczulających lub bardzo cienkich igieł, co minimalizuje dyskomfort. Karolina dba, by każdy zabieg był jak najbardziej komfortowy.</div></div></div>
     <div class="faq-i ah"><button class="faq-q">Jak długo trwają efekty botoksu i wypełniaczy?<span class="faq-ic">+</span></button><div class="faq-a"><div class="faq-ai">Efekty botoksu utrzymują się od 4 do 6 miesięcy, wypełniaczy — od 6 do 18 miesięcy, w zależności od preparatu i metabolizmu. Podczas konsultacji omówimy dokładny plan dla Ciebie.</div></div></div>
-    <div class="faq-i ah"><button class="faq-q">Ile kosztuje konsultacja?<span class="faq-ic">+</span></button><div class="faq-a"><div class="faq-ai">Konsultacja jest bezpłatna i stanowi integralną część każdej wizyty. Dopiero po omówieniu Twoich potrzeb i celów przystępujemy do zabiegu.</div></div></div>
-    <div class="faq-i ah"><button class="faq-q">Czy muszę się przygotować przed wizytą?<span class="faq-ic">+</span></button><div class="faq-a"><div class="faq-ai">W zależności od zabiegu mogą obowiązywać szczegółowe zalecenia przedzabiegowe — np. odstawienie niektórych leków lub alkoholu. Poinformujemy Cię o wszystkim przy rezerwacji.</div></div></div>
-    <div class="faq-i ah"><button class="faq-q">Czy można połączyć kilka zabiegów podczas jednej wizyty?<span class="faq-ic">+</span></button><div class="faq-a"><div class="faq-ai">Tak — wiele zabiegów można łączyć. Karolina oceni, które kombinacje są bezpieczne i korzystne dla Twojej skóry, podczas wstępnej konsultacji.</div></div></div>
+    <div class="faq-i ah"><button class="faq-q">Ile kosztuje konsultacja?<span class="faq-ic">+</span></button><div class="faq-a"><div class="faq-ai">Konsultacja jest bezpłatna i stanowi integralną część każdej wizyty. Dopiero po omówieniu Twoich potrzeb przystępujemy do zabiegu.</div></div></div>
+    <div class="faq-i ah"><button class="faq-q">Czy muszę się przygotować przed wizytą?<span class="faq-ic">+</span></button><div class="faq-a"><div class="faq-ai">W zależności od zabiegu mogą obowiązywać zalecenia przedzabiegowe — np. odstawienie niektórych leków lub alkoholu. Poinformujemy Cię o wszystkim przy rezerwacji.</div></div></div>
+    <div class="faq-i ah"><button class="faq-q">Czy można połączyć kilka zabiegów podczas jednej wizyty?<span class="faq-ic">+</span></button><div class="faq-a"><div class="faq-ai">Tak — wiele zabiegów można łączyć. Karolina oceni, które kombinacje są bezpieczne i korzystne dla Twojej skóry podczas wstępnej konsultacji.</div></div></div>
   </div>
 </section>
 
-<!-- ═══ CTA ═══ -->
+<!-- ═══════════════ CTA ═══════════════ -->
 <section class="sec sec--dk cta" id="rezerwacja">
+  <div class="bgw cta-bgw1">Passione</div>
+  <div class="bgw cta-bgw2">Beauty</div>
   <div class="cta-inner">
-    <div class="ey ah"><span class="sec-lbl">Zarezerwuj wizytę</span></div>
+    <div class="ey ah"><span class="slbl">Zarezerwuj wizytę</span></div>
     <h2 class="cta-h2 ah"><span class="ga">La Passione</span><br>czeka na Ciebie</h2>
     <div class="cta-contacts ah">
       <div class="cta-ci"><span class="cta-ct">Telefon</span><a href="tel:+48000000000" class="cta-cv">+48 000 000 000</a></div>
@@ -614,23 +646,19 @@ footer{background:var(--dark);color:var(--w);border-top:1px solid rgba(253,252,2
   </div>
 </section>
 
-<!-- ═══ FOOTER ═══ -->
+<!-- ═══════════════ FOOTER ═══════════════ -->
 <footer>
   <div class="f-top">
     <div>
       <div class="f-logo gx">La Passione</div>
       <div class="f-sub">by Karolina Da Corso</div>
     </div>
-    <div class="f-navgrid">
+    <div class="f-ngrid">
       <div class="f-ng"><h4>Studio</h4><ul><li><a href="#uslugi">Usługi</a></li><li><a href="#galeria">Galeria</a></li><li><a href="#o-nas">O nas</a></li><li><a href="#filozofia">Filozofia</a></li></ul></div>
       <div class="f-ng"><h4>Zabiegi</h4><ul><li><a href="#uslugi">Botoks</a></li><li><a href="#uslugi">Wypełniacze</a></li><li><a href="#uslugi">Mezoterapia</a></li><li><a href="#uslugi">Stylizacja rzęs</a></li></ul></div>
       <div class="f-ng"><h4>Kontakt</h4><ul><li><a href="tel:+48000000000">+48 000 000 000</a></li><li><a href="mailto:kontakt@lapassione.pl">kontakt@lapassione.pl</a></li><li><a href="#faq">FAQ</a></li><li><a href="#rezerwacja">Rezerwacja</a></li></ul></div>
     </div>
-    <div class="f-soc">
-      <a href="#">Instagram</a>
-      <a href="#">Facebook</a>
-      <a href="#">TikTok</a>
-    </div>
+    <div class="f-soc"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">TikTok</a></div>
   </div>
   <div class="f-bot">
     <span class="f-copy">© 2025 La Passione by Karolina Da Corso · Wszelkie prawa zastrzeżone</span>
@@ -641,12 +669,9 @@ footer{background:var(--dark);color:var(--w);border-top:1px solid rgba(253,252,2
 <script>
 /* LOADER */
 const ldr = document.getElementById('ldr');
-document.getElementById('lline').style.width = '100px';
+document.getElementById('ll').style.width = '100px';
 window.addEventListener('load', () => {
-  setTimeout(() => {
-    ldr.style.opacity = '0'; ldr.style.visibility = 'hidden';
-    heroIn();
-  }, 1800);
+  setTimeout(() => { ldr.style.opacity='0'; ldr.style.visibility='hidden'; heroIn(); }, 1800);
 });
 
 /* PROGRESS + NAV */
@@ -654,84 +679,73 @@ const prog = document.getElementById('prog');
 window.addEventListener('scroll', () => {
   prog.style.width = (window.scrollY / (document.documentElement.scrollHeight - innerHeight) * 100) + '%';
   document.getElementById('nav').classList.toggle('s', window.scrollY > 60);
-}, { passive: true });
+}, { passive:true });
 
 /* CURSOR */
 const dot = document.getElementById('dot'), ring = document.getElementById('ring');
-let mx = 0, my = 0, rx = 0, ry = 0;
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  dot.style.left = mx + 'px'; dot.style.top = my + 'px';
-});
-(function raf() {
-  rx += (mx - rx) * .1; ry += (my - ry) * .1;
-  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-  requestAnimationFrame(raf);
-})();
-document.querySelectorAll('a,button,.srv-item,.g').forEach(el => {
-  el.addEventListener('mouseenter', () => { dot.style.transform = 'translate(-50%,-50%) scale(2.2)'; ring.style.width = ring.style.height = '50px'; ring.style.opacity = '.2'; });
-  el.addEventListener('mouseleave', () => { dot.style.transform = 'translate(-50%,-50%) scale(1)'; ring.style.width = ring.style.height = '30px'; ring.style.opacity = '1'; });
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; dot.style.left=mx+'px'; dot.style.top=my+'px'; });
+(function raf(){ rx+=(mx-rx)*.1; ry+=(my-ry)*.1; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(raf); })();
+document.querySelectorAll('a,button,.srv-item,.g').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ dot.style.transform='translate(-50%,-50%) scale(2.2)'; ring.style.width=ring.style.height='50px'; ring.style.opacity='.2'; });
+  el.addEventListener('mouseleave',()=>{ dot.style.transform='translate(-50%,-50%) scale(1)'; ring.style.width=ring.style.height='30px'; ring.style.opacity='1'; });
 });
 
-/* HERO ENTRANCE */
-function heroIn() {
-  setTimeout(() => { document.getElementById('hl').classList.add('on'); document.getElementById('hr').classList.add('on'); }, 80);
-  ['hw0','hw1'].forEach((id,i) => setTimeout(() => document.getElementById(id)?.classList.add('on'), 280 + i * 170));
-  setTimeout(() => document.getElementById('ht').classList.add('on'), 700);
-  setTimeout(() => document.getElementById('hb').classList.add('on'), 920);
+/* HERO */
+function heroIn(){
+  setTimeout(()=>{ document.getElementById('hl').classList.add('on'); document.getElementById('hr').classList.add('on'); }, 80);
+  ['hw0','hw1'].forEach((id,i)=>setTimeout(()=>document.getElementById(id)?.classList.add('on'), 280+i*170));
+  setTimeout(()=>document.getElementById('ht').classList.add('on'), 700);
+  setTimeout(()=>document.getElementById('hb').classList.add('on'), 920);
 }
 
 /* INTERSECTION OBSERVER */
-const io = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(!entry.isIntersecting) return;
     const el = entry.target;
-    const sibs = [...el.parentElement.children].filter(c =>
-      c.classList.contains('ah') || c.classList.contains('ahl') ||
-      c.classList.contains('ahr') || c.classList.contains('ahc'));
-    setTimeout(() => el.classList.add('av'), sibs.indexOf(el) * 88);
+    const sibs = [...el.parentElement.children].filter(c=>
+      c.classList.contains('ah')||c.classList.contains('ahl')||
+      c.classList.contains('ahr')||c.classList.contains('ahc'));
+    setTimeout(()=>el.classList.add('av'), sibs.indexOf(el)*88);
     io.unobserve(el);
   });
-}, { threshold: 0.07, rootMargin: '0px 0px -20px 0px' });
-document.querySelectorAll('.ah,.ahl,.ahr,.ahc').forEach(el => io.observe(el));
+},{ threshold:.07, rootMargin:'0px 0px -20px 0px' });
+document.querySelectorAll('.ah,.ahl,.ahr,.ahc').forEach(el=>io.observe(el));
+
+/* ABOUT PHOTO FLOAT */
+const aph = document.getElementById('aph');
+new IntersectionObserver(([e])=>{ if(e.isIntersecting){ aph.classList.add('av'); aph.querySelector('.about-photo')?.classList.add('av'); } },{ threshold:.1 }).observe(aph);
 
 /* COUNT-UP */
-const eoq = t => 1 - Math.pow(1 - t, 4);
-document.querySelectorAll('[data-target]').forEach(el => {
-  new IntersectionObserver(([e]) => {
-    if (!e.isIntersecting) return;
-    const t = +el.dataset.target, s = el.dataset.suf || '', t0 = performance.now();
-    (function tick(now) {
-      const p = Math.min((now - t0) / 2000, 1);
-      el.textContent = Math.floor(eoq(p) * t) + s;
-      p < 1 ? requestAnimationFrame(tick) : (el.textContent = t + s);
-    })(t0);
-  }, { threshold: .6 }).observe(el);
+const eoq = t => 1-Math.pow(1-t,4);
+document.querySelectorAll('[data-target]').forEach(el=>{
+  new IntersectionObserver(([e])=>{
+    if(!e.isIntersecting) return;
+    const t=+el.dataset.target, s=el.dataset.suf||'', t0=performance.now();
+    (function tick(now){ const p=Math.min((now-t0)/2000,1); el.textContent=Math.floor(eoq(p)*t)+s; p<1?requestAnimationFrame(tick):(el.textContent=t+s); })(t0);
+  },{threshold:.6}).observe(el);
 });
 
 /* TESTIMONIALS */
-const slides = document.querySelectorAll('.t-slide'), tdots = document.querySelectorAll('.t-dot');
-let ct = 0, tt;
-function goTo(n) {
-  slides[ct].classList.remove('on'); tdots[ct].classList.remove('on');
-  ct = (n + slides.length) % slides.length;
-  slides[ct].classList.add('on'); tdots[ct].classList.add('on');
-}
-function startT() { tt = setInterval(() => goTo(ct + 1), 4200); }
-document.getElementById('tn').addEventListener('click', () => { goTo(ct + 1); clearInterval(tt); startT(); });
-document.getElementById('tp').addEventListener('click', () => { goTo(ct - 1); clearInterval(tt); startT(); });
-tdots.forEach((d, i) => d.addEventListener('click', () => { goTo(i); clearInterval(tt); startT(); }));
-document.querySelector('.testi-inner')?.closest('section').addEventListener('mouseenter', () => clearInterval(tt));
-document.querySelector('.testi-inner')?.closest('section').addEventListener('mouseleave', startT);
+const slides=document.querySelectorAll('.t-slide'), tdots=document.querySelectorAll('.t-dot');
+let ct=0, tt;
+function goTo(n){ slides[ct].classList.remove('on'); tdots[ct].classList.remove('on'); ct=(n+slides.length)%slides.length; slides[ct].classList.add('on'); tdots[ct].classList.add('on'); }
+function startT(){ tt=setInterval(()=>goTo(ct+1),4200); }
+document.getElementById('tn').addEventListener('click',()=>{ goTo(ct+1); clearInterval(tt); startT(); });
+document.getElementById('tp').addEventListener('click',()=>{ goTo(ct-1); clearInterval(tt); startT(); });
+tdots.forEach((d,i)=>d.addEventListener('click',()=>{ goTo(i); clearInterval(tt); startT(); }));
+const testiSec = document.querySelector('.testi');
+testiSec.addEventListener('mouseenter',()=>clearInterval(tt));
+testiSec.addEventListener('mouseleave',startT);
 startT();
 
 /* FAQ */
-document.querySelectorAll('.faq-q').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item = btn.parentElement;
-    const was = item.classList.contains('open');
-    document.querySelectorAll('.faq-i').forEach(i => i.classList.remove('open'));
-    if (!was) item.classList.add('open');
+document.querySelectorAll('.faq-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item=btn.parentElement, was=item.classList.contains('open');
+    document.querySelectorAll('.faq-i').forEach(i=>i.classList.remove('open'));
+    if(!was) item.classList.add('open');
   });
 });
 </script>
