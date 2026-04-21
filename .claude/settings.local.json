@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__beauty-designer__search_beauty_references",
+      "mcp__beauty-designer__get_color_palette",
+      "mcp__beauty-designer__extract_design_tokens",
+      "mcp__beauty-designer__generate_design_brief",
+      "mcp__beauty-designer__validate_design_quality"
+    ]
+  }
+}

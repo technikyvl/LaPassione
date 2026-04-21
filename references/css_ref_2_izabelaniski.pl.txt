@@ -1,0 +1,5 @@
+
+=== INLINE STYLE ATRYBUTY ===
+background-color: rgba(50,50,58,1);
+color: #ffffff
+background-color: #cbb9aa

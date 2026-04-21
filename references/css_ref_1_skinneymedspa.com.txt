@@ -1,0 +1,14 @@
+
+=== INLINE STYLE ATRYBUTY ===
+color:#D3AF37;letter-spacing:3px;font-size:18px
+font-weight:300;font-size:100%;font-family:'Helvetica Neue LT Pro 27 Ultra Light Condensed','Helvetica Neue',Helvetica,Arial,sans-serif
+text-decoration: line-through;color: #777
+color: #d00;font-weight: 700
+color:#D3AF37;letter-spacing:3px;font-size:12px
+display:flex;flex-direction:column;align-items:flex-start;width:100%;padding:20px 0 0;
+display:flex;align-items:center;width:100%;margin:0 0 28px;width:100%;
+display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:999px;background:#111111;color:#FFFFFF;font-family:Helvetica,Arial,sans-serif;font-size:16px;line-height:1;font-weight:400;flex:0 0 34px;
+height:1px;background:#D8D4CF;flex:1 1 auto;margin:0 14px;
+display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:999px;border:1px solid #111111;background:#FFFFFF;color:#111111;font-family:Helvetica,Arial,sans-serif;font-size:16px;line-height:1;font-weight:400;flex:0 0 34px;
+position:relative;top:auto;left:auto;right:auto;opacity:1;visibility:visible;pointer-events:auto;transform:none;display:flex;align-items:center;justify-content:center;width:100%;min-height:56px;padding:14px 22px;border-radius:8px;border:1px solid #E6E0DA;background:#FFFFFF;box-shadow:none;text-decoration:none;color:#111111;
+display:flex;align-items:center;justify-content:center;width:100%;font-size:22px;line-height:1.1;letter-spacing:1.4px;text-transform:uppercase;font-weight:500;color:#111111;

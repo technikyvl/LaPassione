@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="La Passione — Studio Urody Karoliny Da Corso. Medycyna estetyczna, stylizacja, manicure i pedicure.">
+    <title>La Passione — Karolina Da Corso</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+    <style>
+/* ─── RESET ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+/* ─── TOKENS ─── */
+:root {
+    --dark:       #09090B;
+    --dark-2:     #111113;
+    --dark-3:     #1C1C1E;
+    --gold:       #C9A96E;
+    --gold-l:     #E8C98A;
+    --gold-d:     #8A6630;
+    --gold-pale:  #F5E9CC;
+    --white:      #FDFCFB;
+    --off:        #F4EFE8;
+    --muted:      rgba(253,252,251,.42);
+    --font-d:     'Cormorant Garamond', Georgia, serif;
+    --font-b:     'DM Sans', Helvetica, sans-serif;
+    --ease:       cubic-bezier(.16,1,.3,1);
+}
+
+body {
+    background: var(--dark);
+    color: var(--white);
+    font-family: var(--font-b);
+    font-weight: 300;
+    line-height: 1.72;
+    overflow-x: hidden;
+    cursor: none;
+}
+
+h1,h2,h3 {
+    font-family: var(--font-d);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -.02em;
+}
+
+/* ─── LOADER ─── */
+#loader {
+    position: fixed; inset: 0;
+    background: var(--dark);
+    z-index: 99999;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 20px;
+    transition: opacity .9s var(--ease), visibility .9s;
+}
+#loader.out { opacity: 0; visibility: hidden; pointer-events: none; }
+.loader-logo {
+    font-family: var(--font-d);
+    font-size: clamp(2rem,5vw,4rem);
+    font-weight: 300;
+    letter-spacing: .18em;
+    background: linear-gradient(90deg, var(--gold-d), var(--gold-l), var(--gold-pale), var(--gold-l), var(--gold-d));
+    background-size: 200% auto;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s linear infinite, fadeUp .9s var(--ease) both;
+}
+.loader-line {
+    width: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    animation: lineGrow 1.4s var(--ease) .3s forwards;
+}
+@keyframes lineGrow { to { width: 120px; } }
+@keyframes fadeUp {
+    from { opacity:0; transform:translateY(14px); }
+    to   { opacity:1; transform:translateY(0); }
+}
+
+/* ─── GOLD METALLIC TEXT ─── */
+.gold {
+    background: linear-gradient(135deg, var(--gold-d) 0%, var(--gold-l) 35%, var(--gold-pale) 52%, var(--gold-l) 68%, var(--gold-d) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.gold-shimmer {
+    background: linear-gradient(90deg, var(--gold-d), var(--gold-l), var(--gold-pale), var(--gold-l), var(--gold-d));
+    background-size: 300% auto;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 5s linear infinite;
+}
+@keyframes shimmer {
+    0%   { background-position: 0% center; }
+    100% { background-position: 300% center; }
+}
+
+/* ─── PROGRESS BAR ─── */
+#prog {
+    position: fixed; top: 0; left: 0;
+    height: 2px; width: 0%;
+    background: linear-gradient(90deg, var(--gold-d), var(--gold-l), var(--gold-pale));
+    z-index: 9999;
+    transition: width .08s linear;
+}
+
+/* ─── CURSOR ─── */
+#cur {
+    position: fixed; width: 8px; height: 8px;
+    background: var(--gold); border-radius: 50%;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%,-50%);
+    transition: transform .15s, opacity .3s;
+}
+#cur-ring {
+    position: fixed; width: 34px; height: 34px;
+    border: 1px solid rgba(201,169,110,.55);
+    border-radius: 50%;
+    pointer-events: none; z-index: 9997;
+    transform: translate(-50%,-50%);
+    transition: width .35s var(--ease), height .35s var(--ease), opacity .35s;
+}
+
+/* ─── NAV ─── */
+nav {
+    position: fixed; top: 2px; left: 0; right: 0;
+    z-index: 500;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: clamp(20px,3vw,32px) clamp(24px,5vw,72px);
+    transition: background .5s var(--ease), padding .4s var(--ease);
+}
+nav.scrolled {
+    background: rgba(9,9,11,.9);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 14px clamp(24px,5vw,72px);
+}
+.nav-logo {
+    font-family: var(--font-d);
+    font-size: clamp(1.1rem,2vw,1.55rem);
+    font-weight: 400;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    text-decoration: none; color: var(--white);
+}
+.nav-logo em { font-style: italic; }
+.nav-links { display: flex; list-style: none; gap: clamp(28px,4vw,52px); }
+.nav-links a {
+    text-decoration: none; color: var(--white);
+    font-size: .75rem; letter-spacing: .16em; text-transform: uppercase;
+    opacity: .6; transition: opacity .3s, color .3s;
+}
+.nav-links a:hover { opacity: 1; color: var(--gold); }
+.nav-btn {
+    font-family: var(--font-b);
+    font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--gold); border: 1px solid rgba(201,169,110,.5);
+    padding: 9px 22px; text-decoration: none;
+    transition: background .3s, color .3s, border-color .3s;
+}
+.nav-btn:hover { background: var(--gold); color: var(--dark); border-color: var(--gold); }
+
+/* ─── HERO ─── */
+.hero {
+    position: relative; height: 100vh; min-height: 600px;
+    display: flex; align-items: flex-end;
+    padding: 0 clamp(24px,5vw,72px) clamp(64px,9vh,110px);
+    overflow: hidden;
+}
+.hero-bg {
+    position: absolute; inset: 0;
+    background: var(--dark-2);
+    background-image: url('images/hero.jpg');
+    background-size: cover; background-position: center 30%;
+}
+.hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(155deg, rgba(9,9,11,.1) 0%, rgba(9,9,11,.55) 55%, rgba(9,9,11,.88) 100%);
+}
+/* decorative ring when no photo */
+.hero-ring {
+    position: absolute; right: -80px; bottom: -120px;
+    width: 520px; height: 520px;
+    border: 1px solid rgba(201,169,110,.1);
+    border-radius: 50%; pointer-events: none;
+}
+.hero-ring::before {
+    content: '';
+    position: absolute; inset: 60px;
+    border: 1px solid rgba(201,169,110,.05);
+    border-radius: 50%;
+}
+.hero-ring::after {
+    content: 'LP';
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    font-family: var(--font-d);
+    font-size: 9rem; font-weight: 300; font-style: italic;
+    color: rgba(201,169,110,.04);
+    letter-spacing: .04em;
+}
+.hero-content { position: relative; z-index: 2; max-width: 78%; }
+.hero-eyebrow {
+    display: flex; align-items: center; gap: 18px;
+    margin-bottom: 22px;
+}
+.hero-label {
+    font-size: .68rem; letter-spacing: .24em; text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0; transform: translateX(-18px);
+    transition: opacity .8s var(--ease), transform .8s var(--ease);
+}
+.hero-line {
+    width: 44px; height: 1px; background: var(--gold);
+    opacity: 0; transform: scaleX(0); transform-origin: left;
+    transition: opacity .6s var(--ease) .3s, transform .8s var(--ease) .3s;
+}
+.hero-label.on { opacity: 1; transform: translateX(0); }
+.hero-line.on  { opacity: 1; transform: scaleX(1); }
+
+h1.hero-title {
+    font-size: clamp(3.8rem,9.5vw,10rem);
+    letter-spacing: -.035em;
+    margin-bottom: 26px;
+}
+.hero-title .w {
+    display: block;
+    opacity: 0; transform: translateY(44px);
+    transition: opacity .9s var(--ease), transform .9s var(--ease);
+}
+.hero-title .w.on { opacity: 1; transform: translateY(0); }
+
+.hero-sub {
+    font-size: clamp(.8rem,1.4vw,.95rem);
+    letter-spacing: .28em; text-transform: uppercase;
+    color: rgba(253,252,251,.5); margin-bottom: 44px;
+    opacity: 0; transform: translateY(14px);
+    transition: opacity .8s var(--ease), transform .8s var(--ease);
+}
+.hero-sub.on { opacity: 1; transform: translateY(0); }
+
+.btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--font-b);
+    font-size: .74rem; letter-spacing: .15em; text-transform: uppercase;
+    border: 1px solid rgba(253,252,251,.25);
+    color: var(--white); text-decoration: none;
+    padding: 14px 32px;
+    transition: border-color .3s, background .3s, color .3s;
+    opacity: 0; transform: translateY(14px);
+    cursor: none;
+}
+.btn.on { opacity: 1; transform: translateY(0); transition: border-color .3s, background .3s, color .3s, opacity .8s var(--ease), transform .8s var(--ease); }
+.btn:hover { border-color: var(--gold); background: var(--gold); color: var(--dark); }
+.btn .arr { transition: transform .3s; }
+.btn:hover .arr { transform: translateX(5px); }
+
+.btn-gold {
+    border-color: var(--gold); background: var(--gold); color: var(--dark);
+}
+.btn-gold:hover { background: transparent; color: var(--gold); }
+
+.hero-scroll {
+    position: absolute; right: clamp(24px,5vw,72px); bottom: clamp(64px,9vh,110px);
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    z-index: 2;
+}
+.hero-scroll span {
+    writing-mode: vertical-rl;
+    font-size: .6rem; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--muted);
+}
+.hero-scroll-bar {
+    width: 1px; height: 56px;
+    background: var(--gold);
+    animation: scrollBlink 2.2s ease-in-out infinite;
+    transform-origin: top;
+}
+@keyframes scrollBlink {
+    0%,100% { transform: scaleY(1); opacity: .5; }
+    50%      { transform: scaleY(.45); opacity: 1; }
+}
+
+/* ─── MARQUEE ─── */
+.mq {
+    overflow: hidden;
+    background: var(--dark-3);
+    padding: 26px 0;
+    border-top: 1px solid rgba(201,169,110,.12);
+    border-bottom: 1px solid rgba(201,169,110,.12);
+}
+.mq--light { background: var(--off); border-color: rgba(9,9,11,.08); }
+.mq-track { display: flex; }
+.mq-inner {
+    display: flex; white-space: nowrap;
+    animation: mqL 26s linear infinite;
+}
+.mq-inner--r { animation: mqR 26s linear infinite; }
+@keyframes mqL { 0% { transform:translateX(0); } 100% { transform:translateX(-50%); } }
+@keyframes mqR { 0% { transform:translateX(-50%); } 100% { transform:translateX(0); } }
+.mq-item {
+    font-family: var(--font-d);
+    font-style: italic; font-weight: 300;
+    font-size: clamp(1.4rem,2.8vw,2.2rem);
+    color: var(--gold);
+    padding: 0 36px;
+    user-select: none;
+}
+.mq--light .mq-item { color: var(--dark-3); }
+.mq-sep { color: var(--gold); font-style: normal; padding: 0 8px; }
+.mq--light .mq-sep { color: var(--gold-d); }
+
+/* ─── SECTION PARTS ─── */
+.eyebrow {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 18px;
+}
+.eyebrow::before {
+    content: ''; display: block;
+    width: 28px; height: 1px; background: var(--gold);
+    flex-shrink: 0;
+}
+.sec-label {
+    font-size: .67rem; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--gold);
+}
+
+/* ─── ANIMATION HELPERS ─── */
+.ah  { opacity:0; transform:translateY(30px); }
+.ahl { opacity:0; transform:translateX(-36px); }
+.ahr { opacity:0; transform:translateX(36px); }
+.ahscale { opacity:0; transform:scale(.96); }
+.ah.av, .ahl.av, .ahr.av, .ahscale.av {
+    opacity:1; transform:none;
+    transition: opacity .75s var(--ease), transform .75s var(--ease);
+}
+
+/* ─── SERVICES ─── */
+.services {
+    background: var(--dark);
+    padding: clamp(80px,10vw,140px) clamp(24px,5vw,72px);
+}
+.services-hd {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 32px; margin-bottom: clamp(48px,6vw,80px);
+    align-items: end;
+}
+.services-hd h2 { font-size: clamp(2.4rem,5vw,4.5rem); }
+.services-desc {
+    color: var(--muted); font-size: .92rem;
+    max-width: 360px; padding-bottom: 8px;
+}
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+}
+
+/* flip card */
+.fc { aspect-ratio: 3/4; perspective: 1200px; cursor: none; }
+.fc-inner {
+    position: relative; width: 100%; height: 100%;
+    transform-style: preserve-3d;
+    transition: transform .72s cubic-bezier(.4,0,.2,1);
+}
+.fc:hover .fc-inner { transform: rotateY(180deg); }
+.fc-f, .fc-b {
+    position: absolute; inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    padding: clamp(22px,3vw,34px);
+    display: flex; flex-direction: column; justify-content: flex-end;
+}
+.fc-f { background: var(--dark-3); overflow: hidden; }
+.fc-b {
+    background: var(--dark-2);
+    transform: rotateY(180deg);
+    border: 1px solid rgba(201,169,110,.2);
+    justify-content: center;
+}
+.fc-num {
+    position: absolute; top: 14px; right: 18px;
+    font-family: var(--font-d); font-size: clamp(4rem,7vw,7rem);
+    font-weight: 300; color: rgba(253,252,251,.03);
+    line-height: 1; user-select: none; pointer-events: none;
+}
+.fc-cat {
+    font-size: .62rem; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 7px;
+}
+.fc-name {
+    font-family: var(--font-d);
+    font-size: clamp(1.2rem,2.2vw,1.7rem); font-weight: 400;
+    line-height: 1.18;
+}
+.fc-b-name {
+    font-family: var(--font-d);
+    font-size: clamp(1.3rem,2vw,1.8rem); font-weight: 600;
+    margin-bottom: 18px;
+}
+.fc-list { list-style: none; margin-bottom: 26px; }
+.fc-list li {
+    font-size: .8rem; color: rgba(253,252,251,.65);
+    padding: 5px 0; border-bottom: 1px solid rgba(253,252,251,.07);
+    display: flex; align-items: center; gap: 10px;
+}
+.fc-list li::before {
+    content: ''; width: 18px; height: 1px;
+    background: var(--gold); flex-shrink: 0;
+}
+.fc-link {
+    font-size: .7rem; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--gold); text-decoration: none;
+    display: flex; align-items: center; gap: 7px;
+    transition: gap .3s;
+}
+.fc-link:hover { gap: 13px; }
+
+/* ─── ABOUT ─── */
+.about {
+    display: grid;
+    grid-template-columns: 55fr 45fr;
+    min-height: 85vh;
+}
+.about-img {
+    position: relative; overflow: hidden;
+    background: var(--dark-3);
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 1.3s var(--ease);
+}
+.about-img.av { clip-path: inset(0 0 0% 0); }
+.about-img img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transform: scale(1.08);
+    transition: transform 1.5s var(--ease);
+}
+.about-img.av img { transform: scale(1); }
+/* monogram placeholder */
+.about-img::before {
+    content: 'K';
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    font-family: var(--font-d); font-size: clamp(7rem,14vw,13rem);
+    font-weight: 300; font-style: italic;
+    color: rgba(201,169,110,.07);
+    pointer-events: none; z-index: 1;
+}
+/* decorative offset frame */
+.about-img::after {
+    content: '';
+    position: absolute; inset: 28px -28px -28px 28px;
+    border: 1.5px solid rgba(201,169,110,.25);
+    z-index: -1; pointer-events: none;
+}
+/* subtle float on loaded image */
+@keyframes float {
+    0%,100% { transform: scale(1) translateY(0); }
+    50%      { transform: scale(1) translateY(-8px); }
+}
+.about-img.av img { animation: float 8s ease-in-out infinite; }
+
+.about-body {
+    background: var(--off);
+    color: var(--dark);
+    padding: clamp(60px,8vw,120px) clamp(40px,6vw,100px);
+    display: flex; flex-direction: column; justify-content: center;
+}
+.about-body .eyebrow::before { background: var(--gold-d); }
+.about-body .sec-label { color: var(--gold-d); }
+.about-body h2 {
+    font-size: clamp(2rem,4vw,3.5rem);
+    color: var(--dark); margin-bottom: 24px;
+}
+.about-body h2 em { font-style: italic; color: var(--gold-d); }
+.about-p {
+    font-size: .9rem; line-height: 1.82;
+    color: rgba(9,9,11,.6); margin-bottom: 18px;
+    max-width: 420px;
+}
+.about-stats {
+    display: flex;
+    border-top: 1px solid rgba(9,9,11,.1);
+    margin-top: 40px;
+}
+.astat {
+    flex: 1; padding: 26px 0;
+    border-right: 1px solid rgba(9,9,11,.1);
+}
+.astat:last-child { border-right: none; }
+.astat:not(:first-child) { padding-left: 24px; }
+.astat-n {
+    display: block;
+    font-family: var(--font-d);
+    font-size: clamp(2rem,4vw,2.8rem); font-weight: 300;
+    color: var(--dark); line-height: 1;
+}
+.astat-l {
+    display: block; font-size: .65rem;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: rgba(9,9,11,.38); margin-top: 5px;
+}
+
+/* ─── TESTIMONIALS ─── */
+.testimonials {
+    background: var(--dark-2);
+    padding: clamp(80px,10vw,140px) clamp(24px,5vw,72px);
+    display: flex; align-items: center; justify-content: center;
+    min-height: 62vh; position: relative; overflow: hidden;
+}
+.t-bg {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    font-family: var(--font-d); font-size: clamp(7rem,18vw,16rem);
+    font-weight: 300; font-style: italic;
+    color: rgba(253,252,251,.018);
+    white-space: nowrap; pointer-events: none; user-select: none;
+}
+.t-wrap {
+    position: relative; z-index: 2;
+    width: 100%; max-width: 860px;
+    text-align: center;
+}
+.t-hd { margin-bottom: clamp(44px,6vw,72px); }
+.t-hd .eyebrow { justify-content: center; }
+.t-hd .eyebrow::before { display: none; }
+.t-hd h2 { font-size: clamp(2rem,4vw,3.2rem); }
+
+.t-slide { display: none; flex-direction: column; align-items: center; }
+.t-slide.on {
+    display: flex;
+    animation: tIn .6s var(--ease) both;
+}
+@keyframes tIn {
+    from { opacity:0; transform:translateY(18px); }
+    to   { opacity:1; transform:translateY(0); }
+}
+.t-stars { color: var(--gold); letter-spacing: 5px; font-size: .95rem; margin-bottom: 28px; }
+.t-quote {
+    font-family: var(--font-d); font-style: italic; font-weight: 300;
+    font-size: clamp(1.25rem,3vw,2rem); line-height: 1.55;
+    color: var(--white); margin-bottom: 34px; max-width: 680px;
+}
+.t-author {
+    font-size: .68rem; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--muted);
+}
+.t-controls {
+    display: flex; align-items: center; justify-content: center;
+    gap: 18px; margin-top: 48px;
+}
+.t-btn {
+    width: 40px; height: 40px;
+    border: 1px solid rgba(201,169,110,.35);
+    background: transparent; color: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    cursor: none; font-size: 1rem;
+    transition: background .3s, border-color .3s, color .3s;
+}
+.t-btn:hover { background: var(--gold); border-color: var(--gold); color: var(--dark); }
+.t-dots { display: flex; gap: 7px; }
+.t-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: rgba(253,252,251,.18); cursor: none;
+    transition: background .3s, transform .3s;
+}
+.t-dot.on { background: var(--gold); transform: scale(1.4); }
+
+/* ─── CTA ─── */
+.cta {
+    background: var(--dark-3);
+    padding: clamp(80px,10vw,140px) clamp(24px,5vw,72px);
+    text-align: center;
+    border-top: 1px solid rgba(201,169,110,.08);
+}
+.cta-label {
+    font-size: .68rem; letter-spacing: .24em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 20px;
+}
+.cta h2 {
+    font-size: clamp(2.6rem,7vw,6rem);
+    line-height: 1.08; margin-bottom: 52px;
+}
+.cta-contacts {
+    display: flex; justify-content: center;
+    gap: clamp(20px,5vw,80px); flex-wrap: wrap;
+    margin-bottom: 52px;
+}
+.cta-ci { display: flex; flex-direction: column; gap: 7px; align-items: center; }
+.cta-ci-type {
+    font-size: .62rem; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--muted);
+}
+.cta-ci-val {
+    font-family: var(--font-d);
+    font-size: clamp(1.1rem,2.5vw,1.7rem); font-weight: 300;
+    color: var(--white); text-decoration: none;
+    transition: color .3s;
+}
+.cta-ci-val:hover { color: var(--gold); }
+
+/* ─── FOOTER ─── */
+footer {
+    background: var(--dark);
+    border-top: 1px solid rgba(253,252,251,.04);
+    padding: clamp(44px,6vw,72px) clamp(24px,5vw,72px);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center; gap: 32px;
+}
+.f-links, .f-social { display: flex; gap: 28px; list-style: none; }
+.f-social { justify-content: flex-end; }
+.f-links a, .f-social a {
+    font-size: .7rem; letter-spacing: .13em; text-transform: uppercase;
+    color: rgba(253,252,251,.32); text-decoration: none;
+    transition: color .3s;
+}
+.f-links a:hover, .f-social a:hover { color: var(--gold); }
+.f-center { text-align: center; }
+.f-logo {
+    font-family: var(--font-d);
+    font-size: clamp(1.4rem,3vw,2.4rem); font-weight: 300;
+    letter-spacing: .1em;
+}
+.f-sub {
+    font-size: .6rem; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--muted); margin-top: 3px;
+}
+.f-copy {
+    grid-column: 1 / -1; text-align: center;
+    padding-top: 28px; border-top: 1px solid rgba(253,252,251,.04);
+    font-size: .6rem; letter-spacing: .1em;
+    color: rgba(253,252,251,.18);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .services-hd { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+    body { cursor: auto; }
+    #cur, #cur-ring { display: none; }
+    .nav-links { display: none; }
+    .nav-btn { display: none; }
+    .hero-content { max-width: 100%; }
+    .services-grid { grid-template-columns: 1fr; }
+    .fc { aspect-ratio: auto; min-height: 280px; }
+    .about { grid-template-columns: 1fr; }
+    .about-img { height: 65vw; }
+    footer { grid-template-columns: 1fr; text-align: center; }
+    .f-social { justify-content: center; }
+    .f-links { justify-content: center; }
+}
+    </style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+    <div class="loader-logo">La Passione</div>
+    <div class="loader-line"></div>
+</div>
+
+<!-- PROGRESS BAR -->
+<div id="prog"></div>
+
+<!-- CURSOR -->
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- NAV -->
+<nav id="nav">
+    <a href="#" class="nav-logo">La <em>Passione</em></a>
+    <ul class="nav-links">
+        <li><a href="#uslugi">Usługi</a></li>
+        <li><a href="#o-nas">O nas</a></li>
+        <li><a href="#opinie">Opinie</a></li>
+    </ul>
+    <a href="#rezerwacja" class="nav-btn">Rezerwacja</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-ring"></div>
+
+    <div class="hero-content">
+        <div class="hero-eyebrow">
+            <span class="hero-label" id="hl">Studio Urody · Karolina Da Corso</span>
+            <span class="hero-line" id="hln"></span>
+        </div>
+        <h1 class="hero-title">
+            <span class="w gold-shimmer" id="hw0">Piękno,</span>
+            <span class="w" id="hw1">które</span>
+            <span class="w" id="hw2">zostaje.</span>
+        </h1>
+        <p class="hero-sub" id="hs">Precyzja &nbsp;·&nbsp; Elegancja &nbsp;·&nbsp; Pasja</p>
+        <a href="#rezerwacja" class="btn" id="hb">Zarezerwuj wizytę <span class="arr">→</span></a>
+    </div>
+
+    <div class="hero-scroll">
+        <span>Scroll</span>
+        <div class="hero-scroll-bar"></div>
+    </div>
+</section>
+
+<!-- MARQUEE 1 -->
+<div class="mq">
+    <div class="mq-track">
+        <div class="mq-inner">
+            <span class="mq-item">La Passione</span><span class="mq-sep">·</span>
+            <span class="mq-item">Studio Urody</span><span class="mq-sep">·</span>
+            <span class="mq-item">Karolina Da Corso</span><span class="mq-sep">·</span>
+            <span class="mq-item">Medycyna Estetyczna</span><span class="mq-sep">·</span>
+            <span class="mq-item">Luksusowa Pielęgnacja</span><span class="mq-sep">·</span>
+            <span class="mq-item">La Passione</span><span class="mq-sep">·</span>
+            <span class="mq-item">Studio Urody</span><span class="mq-sep">·</span>
+            <span class="mq-item">Karolina Da Corso</span><span class="mq-sep">·</span>
+            <span class="mq-item">Medycyna Estetyczna</span><span class="mq-sep">·</span>
+            <span class="mq-item">Luksusowa Pielęgnacja</span><span class="mq-sep">·</span>
+        </div>
+    </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="uslugi">
+    <div class="services-hd">
+        <div>
+            <div class="eyebrow ah"><span class="sec-label">Nasze zabiegi</span></div>
+            <h2 class="ah">Kompleksowa<br>pielęgnacja</h2>
+        </div>
+        <p class="services-desc ah">Każdy zabieg to unikalne doświadczenie — dostosowane do Twoich potrzeb, wykonane z precyzją i pasją.</p>
+    </div>
+
+    <div class="services-grid">
+        <!-- 01 -->
+        <div class="fc ah">
+            <div class="fc-inner">
+                <div class="fc-f">
+                    <span class="fc-num">01</span>
+                    <div class="fc-cat">Medycyna Estetyczna</div>
+                    <div class="fc-name">Botoks</div>
+                </div>
+                <div class="fc-b">
+                    <div class="fc-b-name gold">Botoks</div>
+                    <ul class="fc-list">
+                        <li>Botoks twarzy</li>
+                        <li>Lifting nosa</li>
+                        <li>Bruksizm</li>
+                    </ul>
+                    <a href="#rezerwacja" class="fc-link">Zarezerwuj <span>→</span></a>
+                </div>
+            </div>
+        </div>
+        <!-- 02 -->
+        <div class="fc ah">
+            <div class="fc-inner">
+                <div class="fc-f">
+                    <span class="fc-num">02</span>
+                    <div class="fc-cat">Modelowanie</div>
+                    <div class="fc-name">Wypełniacze</div>
+                </div>
+                <div class="fc-b">
+                    <div class="fc-b-name gold">Wypełniacze</div>
+                    <ul class="fc-list">
+                        <li>Usta</li>
+                        <li>Policzki</li>
+                        <li>Broda i żuchwa</li>
+                    </ul>
+                    <a href="#rezerwacja" class="fc-link">Zarezerwuj <span>→</span></a>
+                </div>
+            </div>
+        </div>
+        <!-- 03 -->
+        <div class="fc ah">
+            <div class="fc-inner">
+                <div class="fc-f">
+                    <span class="fc-num">03</span>
+                    <div class="fc-cat">Regeneracja</div>
+                    <div class="fc-name">Mezoterapia</div>
+                </div>
+                <div class="fc-b">
+                    <div class="fc-b-name gold">Mezoterapia</div>
+                    <ul class="fc-list">
+                        <li>Mezoterapia igłowa</li>
+                        <li>Koktajle witaminowe</li>
+                        <li>Biorewitalizacja</li>
+                    </ul>
+                    <a href="#rezerwacja" class="fc-link">Zarezerwuj <span>→</span></a>
+                </div>
+            </div>
+        </div>
+        <!-- 04 -->
+        <div class="fc ah">
+            <div class="fc-inner">
+                <div class="fc-f">
+                    <span class="fc-num">04</span>
+                    <div class="fc-cat">Stylizacja</div>
+                    <div class="fc-name">Laminacja<br>brwi</div>
+                </div>
+                <div class="fc-b">
+                    <div class="fc-b-name gold">Laminacja brwi</div>
+                    <ul class="fc-list">
+                        <li>Laminacja + henna</li>
+                        <li>Regulacja</li>
+                        <li>Korekta koloru</li>
+                    </ul>
+                    <a href="#rezerwacja" class="fc-link">Zarezerwuj <span>→</span></a>
+                </div>
+            </div>
+        </div>
+        <!-- 05 -->
+        <div class="fc ah">
+            <div class="fc-inner">
+                <div class="fc-f">
+                    <span class="fc-num">05</span>
+                    <div class="fc-cat">Stylizacja</div>
+                    <div class="fc-name">Stylizacja<br>rzęs</div>
+                </div>
+                <div class="fc-b">
+                    <div class="fc-b-name gold">Stylizacja rzęs</div>
+                    <ul class="fc-list">
+                        <li>Przedłużanie</li>
+                        <li>Lash lift</li>
+                        <li>Volume</li>
+                    </ul>
+                    <a href="#rezerwacja" class="fc-link">Zarezerwuj <span>→</span></a>
+                </div>
+            </div>
+        </div>
+        <!-- 06 -->
+        <div class="fc ah">
+            <div class="fc-inner">
+                <div class="fc-f">
+                    <span class="fc-num">06</span>
+                    <div class="fc-cat">Paznokcie</div>
+                    <div class="fc-name">Manicure</div>
+                </div>
+                <div class="fc-b">
+                    <div class="fc-b-name gold">Manicure</div>
+                    <ul class="fc-list">
+                        <li>Manicure japoński</li>
+                        <li>Hybryda</li>
+                        <li>Żelowe przedłużanie</li>
+                    </ul>
+                    <a href="#rezerwacja" class="fc-link">Zarezerwuj <span>→</span></a>
+                </div>
+            </div>
+        </div>
+        <!-- 07 -->
+        <div class="fc ah">
+            <div class="fc-inner">
+                <div class="fc-f">
+                    <span class="fc-num">07</span>
+                    <div class="fc-cat">Paznokcie</div>
+                    <div class="fc-name">Pedicure</div>
+                </div>
+                <div class="fc-b">
+                    <div class="fc-b-name gold">Pedicure</div>
+                    <ul class="fc-list">
+                        <li>Pedicure SPA</li>
+                        <li>Hybryda</li>
+                        <li>Parafina</li>
+                    </ul>
+                    <a href="#rezerwacja" class="fc-link">Zarezerwuj <span>→</span></a>
+                </div>
+            </div>
+        </div>
+        <!-- 08 -->
+        <div class="fc ah">
+            <div class="fc-inner">
+                <div class="fc-f">
+                    <span class="fc-num">08</span>
+                    <div class="fc-cat">Pielęgnacja</div>
+                    <div class="fc-name">Zabiegi<br>na twarz</div>
+                </div>
+                <div class="fc-b">
+                    <div class="fc-b-name gold">Zabiegi na twarz</div>
+                    <ul class="fc-list">
+                        <li>Oczyszczanie</li>
+                        <li>Nawilżenie</li>
+                        <li>Anti-aging</li>
+                    </ul>
+                    <a href="#rezerwacja" class="fc-link">Zarezerwuj <span>→</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MARQUEE 2 (reverse, light) -->
+<div class="mq mq--light">
+    <div class="mq-track">
+        <div class="mq-inner mq-inner--r">
+            <span class="mq-item">Laminacja Brwi</span><span class="mq-sep">·</span>
+            <span class="mq-item">Stylizacja Rzęs</span><span class="mq-sep">·</span>
+            <span class="mq-item">Botoks</span><span class="mq-sep">·</span>
+            <span class="mq-item">Wypełniacze</span><span class="mq-sep">·</span>
+            <span class="mq-item">Mezoterapia</span><span class="mq-sep">·</span>
+            <span class="mq-item">Manicure</span><span class="mq-sep">·</span>
+            <span class="mq-item">Pedicure</span><span class="mq-sep">·</span>
+            <span class="mq-item">Laminacja Brwi</span><span class="mq-sep">·</span>
+            <span class="mq-item">Stylizacja Rzęs</span><span class="mq-sep">·</span>
+            <span class="mq-item">Botoks</span><span class="mq-sep">·</span>
+            <span class="mq-item">Wypełniacze</span><span class="mq-sep">·</span>
+            <span class="mq-item">Mezoterapia</span><span class="mq-sep">·</span>
+            <span class="mq-item">Manicure</span><span class="mq-sep">·</span>
+            <span class="mq-item">Pedicure</span><span class="mq-sep">·</span>
+        </div>
+    </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="o-nas">
+    <div class="about-img ahl" id="aboutImg">
+        <img src="images/about.jpg" alt="Karolina Da Corso"
+             onerror="this.style.display='none'">
+    </div>
+    <div class="about-body">
+        <div class="eyebrow ah"><span class="sec-label">O Karolinie</span></div>
+        <h2 class="ah">Mistrzyni piękna<br><em>z pasją w sercu</em></h2>
+        <p class="about-p ah">
+            Karolina Da Corso to kosmetolog i specjalistka medycyny estetycznej z wieloletnim doświadczeniem. Studio La Passione to miejsce, gdzie precyzja spotyka się z delikatnością — a każda klientka traktowana jest z najwyższą uwagą.
+        </p>
+        <p class="about-p ah">
+            Pasja do piękna, nieustanne doskonalenie umiejętności i indywidualne podejście sprawiają, że jej klientki wracają. Zawsze.
+        </p>
+        <div class="about-stats">
+            <div class="astat ah">
+                <span class="astat-n" data-target="8" data-suffix="+">0</span>
+                <span class="astat-l">Lat doświadczenia</span>
+            </div>
+            <div class="astat ah">
+                <span class="astat-n" data-target="2000" data-suffix="+">0</span>
+                <span class="astat-l">Klientek</span>
+            </div>
+            <div class="astat ah">
+                <span class="astat-n" data-target="50" data-suffix="+">0</span>
+                <span class="astat-l">Zabiegów</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="opinie">
+    <div class="t-bg">La Passione</div>
+    <div class="t-wrap">
+        <div class="t-hd">
+            <div class="eyebrow ah"><span class="sec-label">Co mówią klientki</span></div>
+            <h2 class="ah">Zaufały nam</h2>
+        </div>
+        <div id="tSlides">
+            <div class="t-slide on">
+                <div class="t-stars">★★★★★</div>
+                <blockquote class="t-quote">„Karolina to prawdziwa artystka. Po każdej wizycie wychodzę jak nowa — pewna siebie i szczęśliwa."</blockquote>
+                <cite class="t-author">Marta W.</cite>
+            </div>
+            <div class="t-slide">
+                <div class="t-stars">★★★★★</div>
+                <blockquote class="t-quote">„Najlepszy botoks, jaki miałam. Naturalnie, precyzyjnie, bez śladu. Zawsze wracam do La Passione."</blockquote>
+                <cite class="t-author">Agnieszka K.</cite>
+            </div>
+            <div class="t-slide">
+                <div class="t-stars">★★★★★</div>
+                <blockquote class="t-quote">„La Passione to nie salon — to doświadczenie. Polecam każdej kobiecie, która ceni się."</blockquote>
+                <cite class="t-author">Joanna M.</cite>
+            </div>
+            <div class="t-slide">
+                <div class="t-stars">★★★★★</div>
+                <blockquote class="t-quote">„Laminacja i stylizacja rzęs — efekty niesamowite. Karolina wie dokładnie, czego chce klientka."</blockquote>
+                <cite class="t-author">Dominika T.</cite>
+            </div>
+        </div>
+        <div class="t-controls">
+            <button class="t-btn" id="tPrev" aria-label="Poprzedni">←</button>
+            <div class="t-dots" id="tDots">
+                <div class="t-dot on"></div>
+                <div class="t-dot"></div>
+                <div class="t-dot"></div>
+                <div class="t-dot"></div>
+            </div>
+            <button class="t-btn" id="tNext" aria-label="Następny">→</button>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="rezerwacja">
+    <div class="cta-label ah">Zarezerwuj wizytę</div>
+    <h2 class="ah"><span class="gold-shimmer">La Passione</span><br>czeka na Ciebie</h2>
+    <div class="cta-contacts ah">
+        <div class="cta-ci">
+            <span class="cta-ci-type">Telefon</span>
+            <a href="tel:+48000000000" class="cta-ci-val">+48 000 000 000</a>
+        </div>
+        <div class="cta-ci">
+            <span class="cta-ci-type">E-mail</span>
+            <a href="mailto:kontakt@lapassione.pl" class="cta-ci-val">kontakt@lapassione.pl</a>
+        </div>
+        <div class="cta-ci">
+            <span class="cta-ci-type">Adres</span>
+            <span class="cta-ci-val">ul. Twoja Ulica, Miasto</span>
+        </div>
+    </div>
+    <a href="#" class="btn btn-gold ah">Zarezerwuj online <span class="arr">→</span></a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <ul class="f-links">
+        <li><a href="#uslugi">Usługi</a></li>
+        <li><a href="#o-nas">O nas</a></li>
+        <li><a href="#opinie">Opinie</a></li>
+    </ul>
+    <div class="f-center">
+        <div class="f-logo gold">La Passione</div>
+        <div class="f-sub">by Karolina Da Corso</div>
+    </div>
+    <ul class="f-social">
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Facebook</a></li>
+    </ul>
+    <div class="f-copy">© 2025 La Passione by Karolina Da Corso · Wszelkie prawa zastrzeżone</div>
+</footer>
+
+<script>
+/* ─── LOADER ─── */
+const loader = document.getElementById('loader');
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        loader.classList.add('out');
+        heroEntrance();
+    }, 1900);
+});
+
+/* ─── PROGRESS BAR ─── */
+const prog = document.getElementById('prog');
+window.addEventListener('scroll', () => {
+    const p = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+    prog.style.width = p + '%';
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+/* ─── CURSOR ─── */
+const cur = document.getElementById('cur');
+const ring = document.getElementById('cur-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.cssText += `left:${mx}px;top:${my}px`; });
+(function raf() {
+    rx += (mx - rx) * .11; ry += (my - ry) * .11;
+    ring.style.cssText += `left:${rx}px;top:${ry}px`;
+    requestAnimationFrame(raf);
+})();
+document.querySelectorAll('a,button,.fc').forEach(el => {
+    el.addEventListener('mouseenter', () => { cur.style.transform='translate(-50%,-50%) scale(2.2)'; ring.style.width=ring.style.height='54px'; ring.style.opacity='.25'; });
+    el.addEventListener('mouseleave', () => { cur.style.transform='translate(-50%,-50%) scale(1)'; ring.style.width=ring.style.height='34px'; ring.style.opacity='.55'; });
+});
+
+/* ─── HERO ENTRANCE ─── */
+function heroEntrance() {
+    const hl  = document.getElementById('hl');
+    const hln = document.getElementById('hln');
+    const hs  = document.getElementById('hs');
+    const hb  = document.getElementById('hb');
+    setTimeout(() => { hl.classList.add('on'); hln.classList.add('on'); }, 80);
+    ['hw0','hw1','hw2'].forEach((id,i) => setTimeout(() => document.getElementById(id)?.classList.add('on'), 280 + i*170));
+    setTimeout(() => { hs.classList.add('on'); }, 880);
+    setTimeout(() => {
+        hb.classList.add('on');
+        setTimeout(() => { hb.style.transition = 'border-color .3s, background .3s, color .3s'; }, 1200);
+    }, 1060);
+}
+
+/* ─── INTERSECTION OBSERVER ─── */
+const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const siblings = [...el.parentElement.children].filter(c =>
+            c.classList.contains('ah') || c.classList.contains('ahl') ||
+            c.classList.contains('ahr') || c.classList.contains('ahscale')
+        );
+        const idx = siblings.indexOf(el);
+        setTimeout(() => el.classList.add('av'), idx * 90);
+        io.unobserve(el);
+    });
+}, { threshold: 0.08, rootMargin: '0px 0px -28px 0px' });
+
+document.querySelectorAll('.ah,.ahl,.ahr,.ahscale').forEach(el => io.observe(el));
+
+/* about image */
+const aboutImg = document.getElementById('aboutImg');
+new IntersectionObserver(([e]) => {
+    if (e.isIntersecting) { aboutImg.classList.add('av'); }
+}, { threshold: 0.1 }).observe(aboutImg);
+
+/* ─── COUNT-UP ─── */
+function easeOutQuart(t) { return 1 - Math.pow(1 - t, 4); }
+function countUp(el) {
+    const target = +el.dataset.target;
+    const suffix = el.dataset.suffix || '';
+    const dur = 2000;
+    const t0 = performance.now();
+    (function tick(now) {
+        const p = Math.min((now - t0) / dur, 1);
+        el.textContent = Math.floor(easeOutQuart(p) * target) + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+        else el.textContent = target + suffix;
+    })(t0);
+}
+document.querySelectorAll('[data-target]').forEach(el => {
+    new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) { countUp(el); e.target._io?.unobserve(e.target); }
+    }, { threshold: 0.6 }).observe(el);
+});
+
+/* ─── TESTIMONIALS ─── */
+const slides = document.querySelectorAll('.t-slide');
+const dots   = document.querySelectorAll('.t-dot');
+let cur_t = 0, timer;
+
+function goTo(n) {
+    slides[cur_t].classList.remove('on');
+    dots[cur_t].classList.remove('on');
+    cur_t = (n + slides.length) % slides.length;
+    slides[cur_t].classList.add('on');
+    dots[cur_t].classList.add('on');
+}
+function startT() { timer = setInterval(() => goTo(cur_t + 1), 4200); }
+function resetT() { clearInterval(timer); startT(); }
+
+document.getElementById('tNext').addEventListener('click', () => { goTo(cur_t + 1); resetT(); });
+document.getElementById('tPrev').addEventListener('click', () => { goTo(cur_t - 1); resetT(); });
+dots.forEach((d, i) => d.addEventListener('click', () => { goTo(i); resetT(); }));
+document.querySelector('.testimonials').addEventListener('mouseenter', () => clearInterval(timer));
+document.querySelector('.testimonials').addEventListener('mouseleave', startT);
+startT();
+</script>
+</body>
+</html>
